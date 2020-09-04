@@ -1,4 +1,4 @@
-from flask import request, json, Response, Blueprint, g
+from flask import request, json, Response, Blueprint, g, jsonify
 from ..models.Campaign import Campaign, CampaignSchema
 
 
@@ -58,16 +58,21 @@ def update(campaign_id):
 
 @campaign_api.route('/<int:campaign_id>', methods=["DELTE"])
 def delete(campaign_id):
-  campaign = Campaign.get_on_campaign(campaign_id)
+  campaign = Campaign.get_one_campaign(campaign_id)
   campaign_data = campaign_data.dump(campaign).data
   return custom_response(campaign_data, 200)
 
 
-@campaign_api.route('/all', methods=['GET'])
+@campaign_api.route('/', methods=['GET'])
 def get_all_campaigns():
   campaigns = Campaign.get_all_campaigns()
+
   if not campaigns:
     return custom_response({'error': 'No Campaigns'}, 404)
 
-  campaign_data = campaign_schema.dump(campaigns).data
+  # campaign_data = campaign_schema.dump(campaigns)
+  campaign_data = []
+  for campaign in campaigns:
+    campaign_data.append(campaign_schema.dump(campaign))
+
   return custom_response(campaign_data, 200)
