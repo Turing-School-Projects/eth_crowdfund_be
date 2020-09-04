@@ -4,9 +4,6 @@ from . import db
 from .Request import RequestSchema
 
 class Campaign(db.Model):
-  """
-  Campaign Model 
-  """
 
   # table name 
   __tablename__ = 'campaigns'
@@ -22,14 +19,10 @@ class Campaign(db.Model):
   expiration = db.Column(db.DateTime)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
-  requests = db.relationship('Request', backref='campaigns')
+  # requests = db.relationship('Request', backref='campaigns')
 
   # class constructor
   def __init__(self, data):
-    """
-    Class constructor 
-    """
-    self.id = data.get('id')
     self.name = data.get('name')
     self.description = data.get('description')
     self.image = data.get('image')
@@ -64,6 +57,10 @@ class Campaign(db.Model):
   def get_one_campaign(id):
     return Campaign.query.get(id)
 
+  @staticmethod 
+  def get_campaign_by_name(name):
+    return Campaign.query.get(name)
+
   def __repr__(self):
     return '<id {}>'.format(self.id)
 
@@ -71,7 +68,7 @@ class CampaignSchema(Schema):
   """
   Campaign Schema 
   """
-  id = fields.Str(dump_only=True)
+  id = fields.Int(dump_only=True)
   name = fields.Str(required=True)
   description = fields.Str(required=False)
   image = fields.Str(required=False)

@@ -3,6 +3,7 @@ from flask import Flask
 from .config import app_config
 from .models import db
 
+from .views.CampaignView import campaign_api as campaign_blueprint
 
 def create_app(env_name):
   """
@@ -16,11 +17,13 @@ def create_app(env_name):
 
   db.init_app(app)
 
+  app.register_blueprint(campaign_blueprint, url_prefix='/api/v1/campaigns')
+
   @app.route('/', methods=['GET'])
   def index():
     """
     example endpoint
     """
-    return 'Etherium 4 life'
+    return 'Etherium for life'
 
   return app

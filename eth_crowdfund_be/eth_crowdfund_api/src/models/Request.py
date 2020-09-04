@@ -28,10 +28,6 @@ class Request(db.Model):
 
   # class constructor
   def __init__(self, data):
-    """
-    Class constructor 
-    """
-    self.id = data.get('id')
     self.description = data.get('description')
     self.image = data.get('image')
     self.value = data.get('value')
@@ -68,10 +64,7 @@ class Request(db.Model):
     return '<id {}>'.format(self.id)
 
 class RequestSchema(Schema):
-  """
-  Request Schema
-  """
-  id = fields.Str(dump_only=True)
+  id = fields.Int(dump_only=True)
   campaign_id = fields.Str(required=True)
   description = fields.Str(required=False)
   image = fields.Str(required=False)
