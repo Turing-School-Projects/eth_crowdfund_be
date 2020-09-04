@@ -1,6 +1,6 @@
-#Etherium Crowdfund
+# Etherium Crowdfund
 
-##Setup
+## Setup
 
 1. Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine, if you do not have them already
   * To install Pipenv on a Mac, you can run `$ brew install pipenv`
@@ -20,7 +20,7 @@ $ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
  1. Run `$ python run.py`
  1. In your browser, navigate to http://localhost:3000/ and you should see `Etherium 4 life`
 
- ###Database Setup
+ ### Database Setup
  1. Delete the `/migrations` directory
  1. Run
  ```
