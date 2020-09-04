@@ -28,6 +28,7 @@ class Request(db.Model):
 
   # class constructor
   def __init__(self, data):
+    self.campaign_id = data.get('campaign_id')
     self.description = data.get('description')
     self.image = data.get('image')
     self.value = data.get('value')
@@ -65,7 +66,7 @@ class Request(db.Model):
 
 class RequestSchema(Schema):
   id = fields.Int(dump_only=True)
-  campaign_id = fields.Str(required=True)
+  campaign_id = fields.Int(required=True)
   description = fields.Str(required=False)
   image = fields.Str(required=False)
   value = fields.Float(required=True)
