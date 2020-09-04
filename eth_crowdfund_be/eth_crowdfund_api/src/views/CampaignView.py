@@ -29,7 +29,6 @@ def custom_response(res, status_code):
     status=status_code
   )
 
-# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>/', methods=['GET'])
 def get_a_campaign(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
@@ -59,7 +58,6 @@ def delete(campaign_id):
   campaign_data = campaign_data.dump(campaign).data
   return custom_response(campaign_data, 200)
 
-# NOT YET FUNCTIONAL
 @campaign_api.route('/', methods=['GET'])
 def get_all_campaigns():
   campaigns = Campaign.get_all_campaigns()
