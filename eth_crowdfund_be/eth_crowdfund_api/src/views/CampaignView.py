@@ -11,19 +11,14 @@ def create():
   req_data = request.get_json()
   data = campaign_schema.load(req_data)
   # data, error = campaign_schema.load(req_data)
+  # BUT WITH ERROR: the above code threw an error, currently ignoring errors
   error = None
   if error: 
     return custom_response(error, 400)
 
-  # import code
-  # code.interact(local=dict(globals(), **locals()))
-
   campaign = Campaign(data)
   campaign.save() 
-
   campaign_data = campaign_schema.dump(campaign)
-  
-
   return custom_response(campaign_data, 201)
   
 
@@ -34,7 +29,7 @@ def custom_response(res, status_code):
     status=status_code
   )
 
-
+# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>/', methods=['GET'])
 def get_a_campaign(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
@@ -44,6 +39,7 @@ def get_a_campaign(campaign_id):
   campaign_data = campaign_schema.dump(campaign).data
   return custom_response(campaign_data, 200)
 
+# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>', methods=['PUT'])
 def update(campaign_id):
   req_data = request.get_json()
@@ -56,13 +52,14 @@ def update(campaign_id):
   campaign_data = campaign_schema.dump(campaign).data
   return custom_response(campaign_data, 200)
 
+# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>', methods=["DELTE"])
 def delete(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
   campaign_data = campaign_data.dump(campaign).data
   return custom_response(campaign_data, 200)
 
-
+# NOT YET FUNCTIONAL
 @campaign_api.route('/', methods=['GET'])
 def get_all_campaigns():
   campaigns = Campaign.get_all_campaigns()
@@ -74,5 +71,4 @@ def get_all_campaigns():
   campaign_data = []
   for campaign in campaigns:
     campaign_data.append(campaign_schema.dump(campaign))
-
   return custom_response(campaign_data, 200)
