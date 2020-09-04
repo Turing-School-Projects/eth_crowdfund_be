@@ -20,4 +20,17 @@ $ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
  1. Run `$ python run.py`
  1. In your browser, navigate to http://localhost:3000/ and you should see `Etherium 4 life`
 
- 
+ ###Database Setup
+ 1. Delete the `/migrations` directory
+ 1. Run
+ ```
+ $ python manage.py db init
+ $ python manage.py db migrate
+ $ python manage.py db upgrade
+ ```
+ 1. You can check the database by running
+ ```
+ $ psql eth_crowdfund_api_db
+ $ \dt
+ ```  
+ and you should see `campaigns` and `requests` tables listed.
