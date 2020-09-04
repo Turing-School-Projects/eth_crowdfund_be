@@ -60,7 +60,7 @@ class Request(db.Model):
   def get_one_request(id):
     return Request.query.get(id)
 
-  def __repr__(self):
+  def __repr(self):
     return '<id {}>'.format(self.id)
 
 class RequestSchema(Schema):

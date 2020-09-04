@@ -1,30 +1,28 @@
 from flask import request, json, Response, Blueprint, g
 from ..models.Campaign import Campaign, CampaignSchema
 
+
+
 campaign_api = Blueprint('campaigns_api', __name__)
 campaign_schema = CampaignSchema()
 
 @campaign_api.route('/', methods=['POST'])
 def create():
   req_data = request.get_json()
-  print('!-! req_data: {}'.format(req_data))
   data = campaign_schema.load(req_data)
-  print('!-! data: {}'.format(data))
   # data, error = campaign_schema.load(req_data)
   error = None
   if error: 
     return custom_response(error, 400)
 
-  # check if campaign already exists
-  # campaign_in_db = Campaign.get_campaign_by_name(data.get('name'))
-  # if campaign_in_db:
-  #   message = {'error': 'Campaign name already in database'}
-  #   return custom_response(message, 400)
+  # import code
+  # code.interact(local=dict(globals(), **locals()))
+
   campaign = Campaign(data)
-  print('!-! campaign: {}'.format(campaign))
   campaign.save() 
 
-  campaign_data = campaign_schema.dump(campaign).data
+  campaign_data = campaign_schema.dump(campaign)
+  
 
   return custom_response(campaign_data, 201)
   

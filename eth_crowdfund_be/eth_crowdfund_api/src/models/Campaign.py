@@ -23,6 +23,7 @@ class Campaign(db.Model):
 
   # class constructor
   def __init__(self, data):
+
     self.name = data.get('name')
     self.description = data.get('description')
     self.image = data.get('image')
@@ -59,9 +60,9 @@ class Campaign(db.Model):
 
   @staticmethod 
   def get_campaign_by_name(name):
-    return Campaign.query.get(name)
+    return Campaign.query.filter_by(name=name).first()
 
-  def __repr__(self):
+  def __repr(self):
     return '<id {}>'.format(self.id)
 
 class CampaignSchema(Schema):
