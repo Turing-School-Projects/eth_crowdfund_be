@@ -28,10 +28,7 @@ class Request(db.Model):
 
   # class constructor
   def __init__(self, data):
-    """
-    Class constructor 
-    """
-    self.id = data.get('id')
+    self.campaign_id = data.get('campaign_id')
     self.description = data.get('description')
     self.image = data.get('image')
     self.value = data.get('value')
@@ -64,15 +61,12 @@ class Request(db.Model):
   def get_one_request(id):
     return Request.query.get(id)
 
-  def __repr__(self):
+  def __repr(self):
     return '<id {}>'.format(self.id)
 
 class RequestSchema(Schema):
-  """
-  Request Schema
-  """
-  id = fields.Str(dump_only=True)
-  campaign_id = fields.Str(required=True)
+  id = fields.Int(dump_only=True)
+  campaign_id = fields.Int(required=True)
   description = fields.Str(required=False)
   image = fields.Str(required=False)
   value = fields.Float(required=True)
