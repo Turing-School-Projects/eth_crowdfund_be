@@ -29,34 +29,35 @@ def custom_response(res, status_code):
     status=status_code
   )
 
-# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>/', methods=['GET'])
 def get_a_campaign(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
   if not campaign: 
     return custom_response({'error':'Campaign not found'}, 404)
 
-  campaign_data = campaign_schema.dump(campaign).data
+  campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 200)
 
-# NOT YET FUNCTIONAL
 @campaign_api.route('/<int:campaign_id>', methods=['PUT'])
 def update(campaign_id):
   req_data = request.get_json()
-  data, error = campaign_schema.load(req_data, partial=True)
+  data = campaign_schema.load(req_data, partial=True)
+  # error not functional yet
+  error = None
   if error:
     return custom_response(error, 400)
   
   campaign = Campaign.get_one_campaign(campaign_id)
   campaign.update(data)
-  campaign_data = campaign_schema.dump(campaign).data
+  campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 200)
 
-# NOT YET FUNCTIONAL
-@campaign_api.route('/<int:campaign_id>', methods=["DELTE"])
+
+@campaign_api.route('/<int:campaign_id>', methods=["DELETE"])
 def delete(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
-  campaign_data = campaign_data.dump(campaign).data
+  campaign.delete()
+  campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 200)
 
 @campaign_api.route('/', methods=['GET'])
