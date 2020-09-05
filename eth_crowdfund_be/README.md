@@ -91,3 +91,5 @@ To make updates to the database and run a new migration, do the following:
 1. You should delete the migration if you are making a change.
 1. `$ python3 manage.py db migrate`
 1. `$ python3 manage.py db upgrade`
+
+* Note: If you encounter any root errors, such as `ERROR [root] Error: Target database is not up to date.` or `ERROR [root] Error: Relative revision -1 didn't produce 1 migrations`, run `$ python3 manage.py db stamp head` to reset the target database to your current database head.
