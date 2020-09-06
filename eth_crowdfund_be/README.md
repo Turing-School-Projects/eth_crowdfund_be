@@ -207,7 +207,7 @@ To make updates to the database and run a new migration, do the following:
 ```
 #### Update a Campaign by ID number
 * Path: `PUT http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
-* Example put JSON body
+* Example JSON put body
 ```
 {
     "description": "test description updated",
@@ -252,5 +252,34 @@ To make updates to the database and run a new migration, do the following:
     "requests": [],
     "updated_at": "2020-09-06T16:48:19.902997",
     "upvote": 4
+}
+```
+### Requests
+#### Create a Request
+* Path `POST http://localhost:3000/api/v1/requests/`
+* Example JSON post body. `campaign_id`, `value`, and `recipient` are required.
+```
+{
+    "campaign_id": "1",
+    "description": "test description a",
+    "image": "request.jpg",
+    "value": 1.0,
+    "recipient": "1"
+}
+```
+* Example response body
+```
+{
+    "approvals": null,
+    "approved": false,
+    "campaign_id": 1,
+    "created_at": "2020-09-06T17:11:23.639004",
+    "description": "test description a",
+    "finalized": false,
+    "id": 2,
+    "image": "request.jpg",
+    "recipient": "1",
+    "updated_at": "2020-09-06T17:11:23.639042",
+    "value": 1.0
 }
 ```
