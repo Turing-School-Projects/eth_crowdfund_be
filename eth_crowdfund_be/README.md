@@ -283,6 +283,25 @@ To make updates to the database and run a new migration, do the following:
     "value": 1.0
 }
 ```
+#### Get a Request by ID number
+* Path: `GET http://localhost:3000/api/v1/requests/<insert request id here>`
+* No body required
+* Example response body
+```
+{
+    "approvals": null,
+    "approved": false,
+    "campaign_id": 1,
+    "created_at": "2020-09-06T17:11:23.639004",
+    "description": "test description a",
+    "finalized": false,
+    "id": 2,
+    "image": "request.jpg",
+    "recipient": "1",
+    "updated_at": "2020-09-06T17:11:23.639042",
+    "value": 1.0
+}
+```
 #### Get all Requests
 * Path `GET http://localhost:3000/api/v1/requests`
 * No body required
@@ -316,4 +335,49 @@ To make updates to the database and run a new migration, do the following:
         "value": 1.0
     }
 ]
+```
+#### Update a Request by ID number
+* Path: `PUT http://localhost:3000/api/v1/requests/<insert request id here>`
+* Example JSON put body
+```
+{
+    "description": "better description",
+    "image": "better_image.jpg",
+    "approvals": "5"
+}
+```
+* Example response body
+```
+{
+    "approvals": "5",
+    "approved": false,
+    "campaign_id": 1,
+    "created_at": "2020-09-06T17:11:23.639004",
+    "description": "better description",
+    "finalized": false,
+    "id": 2,
+    "image": "better_image.jpg",
+    "recipient": "1",
+    "updated_at": "2020-09-06T17:11:47.639042",
+    "value": 1.0
+}
+```
+#### Delete a Request by ID number
+* Path: `DELETE http://localhost:3000/api/v1/requests/<insert request id here>`
+* No body required
+* Example response body
+```
+{
+    "approvals": null,
+    "approved": false,
+    "campaign_id": 1,
+    "created_at": "2020-09-06T18:05:01.891894",
+    "description": "test description b",
+    "finalized": false,
+    "id": 3,
+    "image": "request_b.jpg",
+    "recipient": "1",
+    "updated_at": "2020-09-06T18:05:01.891901",
+    "value": 2.0
+}
 ```
