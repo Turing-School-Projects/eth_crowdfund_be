@@ -153,3 +153,31 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 2
 }
 ```
+#### Update a Campaign by ID number
+* Path: `PUT http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
+* Example put JSON body
+```
+{
+    "description": "test description updated",
+    "name": "Better Name Campaign",
+    "upvote": 4
+}
+```
+* Example response body
+```
+{
+    "address": "1",
+    "contributors": 1,
+    "created_at": "2020-09-06T15:49:49.445152",
+    "description": "test description updated",
+    "expiration": null,
+    "id": 4,
+    "image": "test.jpg",
+    "manager": "3",
+    "min_contribution": 5.0,
+    "name": "Better Name Campaign",
+    "requests": [],
+    "updated_at": "2020-09-06T16:48:19.902997",
+    "upvote": 4
+}
+```
