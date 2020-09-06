@@ -153,6 +153,58 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 2
 }
 ```
+#### Get all Campaigns
+* Path: `GET http://localhost:3000/api/v1/campaigns`
+* No body required
+* Example response body
+```
+[
+    {
+        "address": "4",
+        "contributors": 1,
+        "created_at": "2020-09-05T20:31:17.196051",
+        "description": "test description",
+        "expiration": null,
+        "id": 1,
+        "image": "test.jpg",
+        "manager": "3",
+        "min_contribution": 5.0,
+        "name": "Test Campaign",
+        "requests": [
+            {
+                "approvals": 1,
+                "approved": false,
+                "campaign_id": 1,
+                "created_at": "2020-09-05T20:41:47.774790",
+                "description": "test description",
+                "finalized": false,
+                "id": 1,
+                "image": "test.jpg",
+                "recipient": "1",
+                "updated_at": "2020-09-05T20:41:47.774800",
+                "value": 1.0
+            }
+        ],
+        "updated_at": "2020-09-05T20:31:17.196090",
+        "upvote": 2
+    },
+    {
+        "address": "2",
+        "contributors": 2,
+        "created_at": "2020-09-06T16:59:05.367795",
+        "description": "test description b",
+        "expiration": null,
+        "id": 5,
+        "image": "test_b.jpg",
+        "manager": "1",
+        "min_contribution": 5.0,
+        "name": "Test Campaign B",
+        "requests": [],
+        "updated_at": "2020-09-06T16:59:05.367801",
+        "upvote": 5
+    }
+]
+```
 #### Update a Campaign by ID number
 * Path: `PUT http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
 * Example put JSON body
