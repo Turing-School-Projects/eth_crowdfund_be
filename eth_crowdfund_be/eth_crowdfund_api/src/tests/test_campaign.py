@@ -125,31 +125,30 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(len(json_data), 2)
     self.assertEqual(res_index.status_code, 200)
 
-  # def test_get_one_campaign(self):
-  #   # create 2 campaigns
-  #   res1 = self.client().post('/api/v1/campaigns/',
-  #                            headers={'Content-Type': 'application/json'},
-  #                            data=json.dumps(self.campaign1))
-  #   self.assertEqual(res1.status_code, 201)
-  #   campaign1_id = json.loads(res1.data)["id"]
+  def test_get_one_campaign(self):
+    # create 2 campaigns
+    res1 = self.client().post('/api/v1/campaigns/',
+                             headers={'Content-Type': 'application/json'},
+                             data=json.dumps(self.campaign1))
+    self.assertEqual(res1.status_code, 201)
+    campaign1_id = json.loads(res1.data)["id"]
     
-  #   res2 = self.client().post('/api/v1/campaigns/',
-  #                            headers={'Content-Type': 'application/json'},
-  #                            data=json.dumps(self.campaign2))
-  #   self.assertEqual(res2.status_code, 201)
-  # # GETTING A `308 Redirect` error. not sure why. works correctly on postman
-  #   res_show = self.client().get('/api/v1/campaigns/{}'.format(campaign1_id),
-  #                                headers={'Content-Type': 'application/json'})
-  #   self.assertEqual(res_show.status_code, 200)
-    # import pdb; pdb.set_trace()
-    # json_data = json.loads(res_show.data)
-    # self.assertEqual(self.campaign1["name"], json_data["name"])
-    # self.assertNotEqual(self.campaign2["name"], json_data["name"])
-    # self.assertEqual(self.campaign1["description"], json_data["description"])
-    # self.assertNotEqual(self.campaign2["description"], json_data["description"])
-    # self.assertEqual(self.campaign1["manager"], json_data["manager"])
-    # self.assertNotEqual(self.campaign2["manager"], json_data["manager"])
-    # self.assertEqual(self.campaign1["address"], json_data["address"])
-    # self.assertEqual(self.campaign1["min_contribution"], json_data["min_contribution"])
-    # self.assertNotEqual(self.campaign2["min_contribution"], json_data["min_contribution"])
+    res2 = self.client().post('/api/v1/campaigns/',
+                             headers={'Content-Type': 'application/json'},
+                             data=json.dumps(self.campaign2))
+    self.assertEqual(res2.status_code, 201)
+  # GETTING A `308 Redirect` error. not sure why. works correctly on postman
+    res_show = self.client().get('/api/v1/campaigns/{}'.format(campaign1_id),
+                                 headers={'Content-Type': 'application/json'})
+    self.assertEqual(res_show.status_code, 200)
+    json_data = json.loads(res_show.data)
+    self.assertEqual(self.campaign1["name"], json_data["name"])
+    self.assertNotEqual(self.campaign2["name"], json_data["name"])
+    self.assertEqual(self.campaign1["description"], json_data["description"])
+    self.assertNotEqual(self.campaign2["description"], json_data["description"])
+    self.assertEqual(self.campaign1["manager"], json_data["manager"])
+    self.assertNotEqual(self.campaign2["manager"], json_data["manager"])
+    self.assertEqual(self.campaign1["address"], json_data["address"])
+    self.assertEqual(self.campaign1["min_contribution"], json_data["min_contribution"])
+    self.assertNotEqual(self.campaign2["min_contribution"], json_data["min_contribution"])
 
