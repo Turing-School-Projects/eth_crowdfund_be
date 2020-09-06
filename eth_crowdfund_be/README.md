@@ -93,3 +93,63 @@ To make updates to the database and run a new migration, do the following:
 1. `$ python3 manage.py db upgrade`
 
 * Note: If you encounter any root errors, such as `ERROR [root] Error: Target database is not up to date.` or `ERROR [root] Error: Relative revision -1 didn't produce 1 migrations`, run `$ python3 manage.py db stamp head` to reset the target database to your current database head.
+
+## API Endpoints
+
+### Campaigns
+
+#### Create a campaign
+
+* Path: `POST http://localhost:3000/api/v1/campaigns/`
+* Example JSON post body:
+```
+{
+    "name": "Test Campaign",
+    "description": "test description",
+    "image": "test.jpg",
+    "contributors": "1",
+    "upvote": "2",
+    "manager": "3",
+    "address": "1",
+    "min_contribution": 5.0
+}
+```
+* Example response body:
+```
+{
+    "address": "1",
+    "contributors": 1,
+    "created_at": "2020-09-06T15:49:49.445152",
+    "description": "test description",
+    "expiration": null,
+    "id": 1,
+    "image": "test.jpg",
+    "manager": "3",
+    "min_contribution": 5.0,
+    "name": "Test Campaign",
+    "requests": [],
+    "updated_at": "2020-09-06T15:49:49.445158",
+    "upvote": 2
+}
+```
+#### Get a Campaign by ID number
+* Path: `GET http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
+* No body required
+* Example response body
+```
+{
+    "address": "1",
+    "contributors": 1,
+    "created_at": "2020-09-06T15:49:49.445152",
+    "description": "test description",
+    "expiration": null,
+    "id": 4,
+    "image": "test.jpg",
+    "manager": "3",
+    "min_contribution": 5.0,
+    "name": "Test Campaign",
+    "requests": [],
+    "updated_at": "2020-09-06T15:49:49.445158",
+    "upvote": 2
+}
+```
