@@ -75,13 +75,13 @@ class CampaignTest(unittest.TestCase):
       "contributors": 5,
       "manager": "1x3y"
     }
-    # create the user before updating
+    # create the campaign before updating
     res = self.client().post('/api/v1/campaigns/',
                              headers={'Content-Type': 'application/json'},
                              data=json.dumps(self.campaign1))
     self.assertEqual(res.status_code, 201)
     campaign1_id = json.loads(res.data)["id"]
-    # save the id and update user
+    # save the id and update campaign
     res_update = self.client().put('/api/v1/campaigns/{}'.format(campaign1_id), 
                             headers={'Content-Type': 'application/json'},
                             data=json.dumps(campaign1_update))
