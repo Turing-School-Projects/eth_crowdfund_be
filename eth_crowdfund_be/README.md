@@ -283,3 +283,37 @@ To make updates to the database and run a new migration, do the following:
     "value": 1.0
 }
 ```
+#### Get all Requests
+* Path `GET http://localhost:3000/api/v1/requests`
+* No body required
+* Example response body
+```
+[
+    {
+        "approvals": 1,
+        "approved": false,
+        "campaign_id": 1,
+        "created_at": "2020-09-05T20:41:47.774790",
+        "description": "test description",
+        "finalized": false,
+        "id": 1,
+        "image": "test.jpg",
+        "recipient": "1",
+        "updated_at": "2020-09-05T20:41:47.774800",
+        "value": 1.0
+    },
+    {
+        "approvals": null,
+        "approved": false,
+        "campaign_id": 1,
+        "created_at": "2020-09-06T17:11:23.639004",
+        "description": "test description a",
+        "finalized": false,
+        "id": 2,
+        "image": "request.jpg",
+        "recipient": "1",
+        "updated_at": "2020-09-06T17:11:23.639042",
+        "value": 1.0
+    }
+]
+```
