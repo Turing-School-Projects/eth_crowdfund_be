@@ -82,6 +82,14 @@ Path: `eth_crowdfund_be/eth_crowdfund_api`
  ```
  and you should see `campaigns` and `requests` tables listed.
  1. To exit the database, `$ exit`
+ 
+ ### Seeding the Database
+ Within the `pipenv shell` virtual environment, do the following:
+ 1. Ensure you have the Click package installed by running `$ pipenv install Click`
+ 2. Ensure you are at `/eth_crowdfund_be/eth_crowdfund_api`
+ 3. Run `$ python3 run.py --seed=True`
+ 4. Execute `$ Ctrl + C` to shut down the server and then restart the server with `$ python3 run.py`
+ 5. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
 
 ### Database Updates
 Path: `eth_crowdfund_be/eth_crowdfund_api`  
