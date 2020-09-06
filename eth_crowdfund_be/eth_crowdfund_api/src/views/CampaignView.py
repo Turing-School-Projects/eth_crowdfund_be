@@ -1,4 +1,4 @@
-from flask import request, json, Response, Blueprint, g, jsonify
+from flask import request, json, Response, Blueprint, jsonify
 from ..models.Campaign import Campaign, CampaignSchema
 
 
@@ -18,6 +18,7 @@ def create():
 
   campaign = Campaign(data)
   campaign.save() 
+  # import pdb; pdb.set_trace()
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
   
