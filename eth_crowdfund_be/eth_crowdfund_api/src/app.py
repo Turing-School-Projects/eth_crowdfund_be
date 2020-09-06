@@ -1,4 +1,6 @@
 from flask import Flask
+from dotenv import load_dotenv # importing dotenv
+load_dotenv(override=True) # loading the environment variables at app startup and overriding any existing system variables
 
 from .config import app_config
 from .models import db
