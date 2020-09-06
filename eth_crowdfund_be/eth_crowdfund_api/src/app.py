@@ -8,10 +8,6 @@ from .views.RequestView import request_api as request_blueprint
 
 
 def create_app(env_name):
-  """
-  Create app
-  """
-
   # app initiliazation
   app = Flask(__name__)
 
@@ -25,9 +21,6 @@ def create_app(env_name):
 
   @app.route('/', methods=['GET'])
   def index():
-    """
-    example endpoint
-    """
     return 'Etherium for life'
 
   return app
