@@ -19,7 +19,7 @@ class Campaign(db.Model):
   expiration = db.Column(db.DateTime)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
-  # requests = db.relationship('Request', backref='campaigns')
+  requests = db.relationship('Request', cascade="all, delete-orphan")
 
   # class constructor
   def __init__(self, data):
