@@ -1,6 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.Campaign import Campaign, CampaignSchema
-
+from . import custom_response
 
 
 campaign_api = Blueprint('campaigns_api', __name__)
@@ -20,14 +20,6 @@ def create():
   campaign.save() 
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
-  
-
-def custom_response(res, status_code):
-  return Response(
-    mimetype="application/json",
-    response=json.dumps(res),
-    status=status_code
-  )
 
 @campaign_api.route('/<int:campaign_id>', methods=['GET'])
 def get_a_campaign(campaign_id):
