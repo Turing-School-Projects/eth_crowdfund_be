@@ -1,26 +1,21 @@
 from flask import request, json, Response, Blueprint, g, jsonify
+from marshmallow import ValidationError
 from ..models.Request import Request, RequestSchema
+from . import custom_response
 
 
 request_api = Blueprint('requests_api', __name__)
 request_schema = RequestSchema()
 
-def custom_response(res, status_code):
-  return Response(
-    mimetype="application/json",
-    response=json.dumps(res),
-    status=status_code
-  )
-
 @request_api.route('/', methods=['POST'])
 def create():
-  req_data = request.get_json()
-  data = request_schema.load(req_data)
-  # data, error = campaign_schema.load(req_data)
-  # BUT WITH ERROR: the above code threw an error, currently ignoring errors
-  error = None
-  if error:
-    return custom_response(error, 400)
+  try: 
+    req_data = request.get_json()
+    data = request_schema.load(req_data)
+  except ValidationError as err:
+    return custom_response(err.messages, 400)
+  except:  
+    return custom_response({ "error": "No input data provided" }, 400)
 
   request_info = Request(data)
   request_info.save()
