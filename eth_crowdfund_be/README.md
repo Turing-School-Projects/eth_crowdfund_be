@@ -22,7 +22,7 @@
 1. Fork and clone down the repository
 1. Change into the directory `$ cd eth_crowdfund_be/eth_crowdfund_api`
 1. You will need to work in a virtual environment. Why? Using a virtual environment for Python projects allows us to have an isolated working copy of Python so we can work on a specific project without worrying about affecting other projects.
-  1. Within the `/eth_crowdfund_api` directory:
+  1. Within the `/eth_crowdfund_api` directory:  
     1. Run `# pipenv --three` to create the virtual environment
     1. Run `$ pipenv shell` to activate the project virtual environment. When you are done working on the project, you should execute `$ exit` to exit the virtual environment
     1. Run `$ pipenv install flask flask-sqlalchemy psycopg2 flask-migrate flask-script marshmallow flask-bcrypt pyjwt` to install all dependencies
