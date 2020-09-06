@@ -21,7 +21,7 @@ class Request(db.Model):
   approvals = db.Column(db.Integer)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
-  campaign = db.relationship('Campaign', backref='requests')
+  campaign = db.relationship('Campaign')
 
 
 
