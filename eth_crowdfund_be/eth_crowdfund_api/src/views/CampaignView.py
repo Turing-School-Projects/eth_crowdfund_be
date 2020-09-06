@@ -29,7 +29,7 @@ def custom_response(res, status_code):
     status=status_code
   )
 
-@campaign_api.route('/<int:campaign_id>/', methods=['GET'])
+@campaign_api.route('/<int:campaign_id>', methods=['GET'])
 def get_a_campaign(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
   if not campaign: 
