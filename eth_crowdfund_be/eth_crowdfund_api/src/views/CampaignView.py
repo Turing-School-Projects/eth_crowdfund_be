@@ -18,7 +18,6 @@ def create():
 
   campaign = Campaign(data)
   campaign.save() 
-  # import pdb; pdb.set_trace()
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
   
