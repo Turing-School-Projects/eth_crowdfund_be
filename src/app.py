@@ -16,7 +16,7 @@ def create_app(env_name):
   app.config.from_object(app_config[env_name])
 
   db.init_app(app)
-  db.create_tables()
+  # db.create_tables()
 
   app.register_blueprint(campaign_blueprint, url_prefix='/api/v1/campaigns')
   app.register_blueprint(request_blueprint, url_prefix='/api/v1/requests')
