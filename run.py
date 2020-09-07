@@ -8,7 +8,7 @@ app = create_app(env_name)
 if __name__ == '__main__':
   port = os.getenv('PORT')
   # run app
-  app.run(host='0.0.0.0', port=port)
+  app.run(host='127.0.0.1', port=port)
 
   with app.app_context():
     add_seeds()
