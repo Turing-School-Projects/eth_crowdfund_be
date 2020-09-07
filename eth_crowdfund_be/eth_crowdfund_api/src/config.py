@@ -17,7 +17,7 @@ class Production(object):
 class Testing(object):
   TESTING = True
   JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
-  SQLALCHEMY_DATABASE_URI = "postgresql://postgres:password@localhost/eth_crowdfund_api_db_test"
+  SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
   SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
