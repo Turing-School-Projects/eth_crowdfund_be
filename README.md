@@ -389,3 +389,5 @@ To make updates to the database and run a new migration, do the following:
     "value": 2.0
 }
 ```
+# testing 
+`$ pytest`
