@@ -6,6 +6,10 @@ from ..models.Campaign import Campaign, CampaignSchema
 campaign_api = Blueprint('campaigns_api', __name__)
 campaign_schema = CampaignSchema()
 
+@campaign_api.route('/', methods=['GET'])
+def hello():
+  return custom_response({"message":"hello"})
+
 @campaign_api.route('/', methods=['POST'])
 def create():
   req_data = request.get_json()
