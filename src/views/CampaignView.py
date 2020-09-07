@@ -6,7 +6,7 @@ from ..models.Campaign import Campaign, CampaignSchema
 campaign_api = Blueprint('campaigns_api', __name__)
 campaign_schema = CampaignSchema()
 
-@campaign_api.route('/', methods=['GET'])
+@campaign_api.route('/hello', methods=['GET'])
 def hello():
   return custom_response({"message":"hello"})
 
