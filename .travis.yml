@@ -8,6 +8,7 @@ addons:
   chrome: stable
 script:
 - pipenv install flask_script
+- FLASK_ENV=testing
 - python manage.py db migrate
 - python manage.py db upgrade
 - pip install -U pytest
