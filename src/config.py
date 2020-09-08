@@ -5,7 +5,6 @@ class Development(object):
   TESTING = False
   SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
 
-
 class Production(object):
   DEBUG = True
   TESTING = False
