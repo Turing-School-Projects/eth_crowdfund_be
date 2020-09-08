@@ -34,7 +34,7 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # ... etc.
 
 def get_url():
-  db = os.getenv('DATABASE_URL')
+  db = os.getenv('SQLALCHEMY_DATABASE_URI')
   return db 
 
 def run_migrations_offline():

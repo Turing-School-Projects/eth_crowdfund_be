@@ -8,6 +8,7 @@ coverage==5.2.1
 distlib==0.3.1
 filelock==3.0.12
 Flask==1.1.2
+Flask-Cors==3.0.9
 # Editable install with no version control (Flask-RESTful==0.3.8)
 -e /usr/local/lib/python3.8/site-packages
 Flask-SQLAlchemy==2.4.4
