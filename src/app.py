@@ -7,6 +7,7 @@ from .models import db
 
 from .views.CampaignView import campaign_api as campaign_blueprint
 from .views.RequestView import request_api as request_blueprint
+from flask_cors import CORS, cross_origin
 
 
 def create_app(env_name):
@@ -27,3 +28,6 @@ def create_app(env_name):
     return 'Etherium for life'
 
   return app
+
+cors = CORS(app)
+app.config['CORS_HEADERS']
