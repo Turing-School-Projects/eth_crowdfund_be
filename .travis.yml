@@ -7,8 +7,7 @@ addons:
   postgresql: 12.3
   chrome: stable
 before script: 
-  - FLASK_ENV=testing
-  - createdb eth_crowdfund_be_api_test
+  - psql -c 'create database eth_crowdfund_api_db_test;' -U postgres  
 script:
   - pipenv install flask_script
   - python manage.py db migrate
