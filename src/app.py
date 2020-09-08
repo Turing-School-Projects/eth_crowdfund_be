@@ -31,4 +31,9 @@ def create_app(env_name):
     return 'Etherium for life'
 
   return app
+  @app.route('/travis', methods=['GET'])
+  def index():
+    return 'travis deployed? YES'
+
+  return app
 
