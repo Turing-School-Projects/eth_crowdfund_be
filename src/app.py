@@ -14,6 +14,9 @@ def create_app(env_name):
   # app initiliazation
   app = Flask(__name__)
 
+  cors = CORS(app)
+  app.config['CORS_HEADERS']
+
   app.config.from_object(app_config[env_name])
 
   db.init_app(app)
@@ -29,5 +32,3 @@ def create_app(env_name):
 
   return app
 
-  cors = CORS(app)
-  app.config['CORS_HEADERS']
