@@ -34,7 +34,11 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # ... etc.
 
 def get_url():
-  db = os.getenv('SQLALCHEMY_DATABASE_URI')
+  env = os.getenv('FLASK_ENV')
+  if env == 'testing':
+    db = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
+  else:
+    db = os.getenv('SQLALCHEMY_DATABASE_URI')
   return db 
 
 def run_migrations_offline():

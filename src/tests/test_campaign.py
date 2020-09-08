@@ -41,7 +41,7 @@ class CampaignTest(unittest.TestCase):
     
     with self.app.app_context():
       # create all db objects
-      # db.create_all()
+      db.create_all()
       # delete test campaigns by name
       existing_campaign1 = Campaign.get_campaign_by_name(self.campaign1["name"])
       if existing_campaign1:
