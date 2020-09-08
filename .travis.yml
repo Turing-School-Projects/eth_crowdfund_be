@@ -7,7 +7,7 @@ addons:
   postgresql: 12.3
   chrome: stable
 before script: 
-- psql -c 'create database eth_crowdfund_api_db_test;' -U postgres
+- psql -c 'create database travis_ci_test;' -U postgres
 script:
 - pipenv install flask_script
 - python manage.py db migrate
