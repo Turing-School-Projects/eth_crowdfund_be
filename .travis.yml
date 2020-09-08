@@ -7,7 +7,7 @@ addons:
   postgresql: 12.3
   chrome: stable
 script:
-- python manage.py db init
+- pipenv install flask_script
 - python manage.py db migrate
 - python manage.py db upgrade
 deploy:
