@@ -1,4 +1,3 @@
-import os
 from __future__ import with_statement
 
 import logging
@@ -9,6 +8,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
+import os
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
