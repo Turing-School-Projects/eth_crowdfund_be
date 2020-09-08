@@ -7,6 +7,7 @@ from .models import db
 
 from .views.CampaignView import campaign_api as campaign_blueprint
 from .views.RequestView import request_api as request_blueprint
+from .views.PriceConverter import price_converter_api as price_converter_blueprint
 from flask_cors import CORS, cross_origin
 
 
@@ -24,6 +25,7 @@ def create_app(env_name):
 
   app.register_blueprint(campaign_blueprint, url_prefix='/api/v1/campaigns')
   app.register_blueprint(request_blueprint, url_prefix='/api/v1/requests')
+  app.register_blueprint(price_converter_blueprint, url_prefix='/api/v1/price_converter')
 
 
   @app.route('/', methods=['GET'])
