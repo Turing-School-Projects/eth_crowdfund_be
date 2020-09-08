@@ -10,6 +10,7 @@ script:
 - pipenv install flask_script
 - python manage.py db migrate
 - python manage.py db upgrade
+- pip install -U pytest
 - pytest
 deploy:
   provider: heroku
