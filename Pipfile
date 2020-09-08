@@ -17,6 +17,7 @@ pyjwt = "*"
 gunicorn = "*"
 python-dotenv = "*"
 sqlalchemy = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"
