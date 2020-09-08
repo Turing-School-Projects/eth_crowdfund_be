@@ -30,9 +30,9 @@ def create_app(env_name):
   def index():
     return 'Etherium for life'
 
-  @app.route('/travis', methods=['GET'])
-  def travis_endpoint():
-    return 'travis deployed? YES'
+  @app.route('/farm', methods=['GET'])
+  def farm():
+    return 'pig cow horse'
 
   return app
 
