@@ -29,5 +29,5 @@ def create_app(env_name):
 
   return app
 
-cors = CORS(app)
-app.config['CORS_HEADERS']
+  cors = CORS(app)
+  app.config['CORS_HEADERS']
