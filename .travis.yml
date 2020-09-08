@@ -1,19 +1,20 @@
 language: python
 python: 
-- "3.8.5"
+  - "3.8.5"
 install:
-- pip install -r requirements.txt
+  - pip install -r requirements.txt
 addons:
   postgresql: 12.3
   chrome: stable
 before script: 
-- psql -c 'create database travis_ci_test;' -U postgres
+  - FLASK_ENV=testing
+  - psql -c 'create database eth_crowdfund_be_api_test;' -U postgres
 script:
-- pipenv install flask_script
-- python manage.py db migrate
-- python manage.py db upgrade
-- pip install -U pytest
-- pytest
+  - pipenv install flask_script
+  - python manage.py db migrate
+  - python manage.py db upgrade
+  - pip install -U pytest
+  - pytest
 deploy:
   provider: heroku
   app: etho-boost
