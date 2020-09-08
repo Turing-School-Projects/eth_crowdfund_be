@@ -1,15 +1,16 @@
 language: python
 python: 
   - "3.8.5"
-install:
-  - pip install -r requirements.txt
 addons:
   postgresql: 12.3
-  chrome: stable
-before script: 
+services: 
+  - postgresql
+install:
+  - pip install -r requirements.txt
+before script:
+  - pipenv install flask_script
   - psql -c 'create database eth_crowdfund_api_db_test;' -U postgres  
 script:
-  - pipenv install flask_script
   - python manage.py db migrate
   - python manage.py db upgrade
   - pip install -U pytest
