@@ -15,7 +15,7 @@ def create_app(env_name):
   app = Flask(__name__)
 
   cors = CORS(app)
-  app.config['CORS_HEADERS']
+  app.config['CORS_HEADERS'] = 'Content-Type'
 
   app.config.from_object(app_config[env_name])
 
