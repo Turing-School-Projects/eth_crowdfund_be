@@ -35,7 +35,7 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 def get_url():
   db = os.getenv('DATABASE_URL')
   return db 
-  
+
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
 
@@ -81,7 +81,7 @@ def run_migrations_online():
     #     poolclass=pool.NullPool,
     # )
 
-    connectable = create_engine(get_url()):
+    connectable = create_engine(get_url())
 
 
     with connectable.connect() as connection:
