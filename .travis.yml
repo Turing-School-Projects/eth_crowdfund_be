@@ -10,8 +10,8 @@ install:
 script:
 - pipenv install flask_script
 # - createdb eth_crowdfund_api_db_test
-- python manage.py db migrate
-- python manage.py db upgrade
+# - python manage.py db migrate
+# - python manage.py db upgrade
 - pytest
 deploy:
   provider: heroku
