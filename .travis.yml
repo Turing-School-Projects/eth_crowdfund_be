@@ -1,20 +1,20 @@
 language: python
-python: 
-  - "3.8.5"
+python:
+- 3.8.5
 addons:
-  postgresql: "12.3"
+  postgresql: '12.3'
 services:
-  - postgresql
+- postgresql
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-  - pipenv install flask_script
-  - python manage.py db migrate
-  - python manage.py db upgrade
+- pipenv install flask_script
+- python manage.py db migrate
+- python manage.py db upgrade
 deploy:
   provider: heroku
   api_key:
-    secure: FE6USvgsV83Ub+AIQNLn86gQ8B05Zt0PA9Pobx8be2lDPYphiqNYStHns2H/1+vCvkhsPftgQaXBWHmMbqTbRpKoaKN9FcHNOxGldwSVuIITEYItspEqyWp8d2+JTOHuGTY3B9X25xK1uB86OwQsRu5GBCdav5ztf9mJmHug3mnmbEA73IHQ6ZMThWeFhClANhgnT0qr5Ua3iBeWz7D9rUhaYmD8BAdAuaztq40FBpR7BKWW91xypk2DbWD4mR47U8WxMJyQSw70Hkm/HU89YdAIIp4jqlpRhpAYXK8QwGXX8ecvCazKoAE9NzWfVFYddc+XWzUrzE+u3z7PePiq8hRPGCWknA9UlNKY9XMdPDlKAdCeTNqBmCwyXWZLxbWkD56C8WFD9zlQHLTXyzpzPM8E7y0CFFkz9LOQaZhl9/ipeqn25m62ikOF2Q5I9buqyHg7KjNgCvM7VjW1vGWczsKoRtZaV1UCKjcgTfhnionHosDrRa34sGkOgdmVFke04YsnbEsAkFYeweO/tNdQ388/ygIj3UVwy4C7L0DM0ktdRBjRNX6NsTqhE7IXa3LC1HW4hTw/fygLnJ8qaTggQf+5FAHPQLvZdKG6UxFy89+zpLo+YcUUzylar/SHS7D4mEe+xlY+OEPps587soLXgR+1NYJjJK1J1QXsWjKWiM0=
+    secure: FXyiqE3KUUtbGTOQDEBoQrY3dL4PCv1zNSYkv5KFCoKxUJOWwYfqrIPwPoFeAGliu4LxJImBnEvWEehfAFep2H/+A0fGewtTpKX7GJtl9h+rIOGfq/ipX4KeFR4LIrC8g14ebfdxls29l3dg5bLuWEJCTI4ZaFfZZmNI/6mjs3VNOZHCoOnzURZH1dgTGfRWT4pwuZZ9gh477CcG5iKuoGoXKSXXfke+XaZ1Fa4Xl5aiqRyJdHrJMh1qgt/HvjAXfWTZdqI5oh+St85irjiOqM6H2wtMqFNoqlaSBS+jYZpN7r6Byj/nMElmP35JQ97jdBVYSjD4hu4V+1G5XctpgAhIryKV4/w3bwhaAM4axLx58cDh1p/M/bYMV/sx4bEWiYgQ79tdHf9Yiyx/pCWeOLuDd6Q5u/ZHIardrhyayqchoS/wkr5DxRo1v40dWjGHs6AFOSO8eALq4iqbXPU1U6ZpL9Gw5t2D7FSdG4jaEhdyI7kU1NVTgXR8aRtKaBqbI3u0C4qW2eE9OcLP7MWyQebASFA2/RZA6YB8NvLHlZiR89hWf+B75gyDYwVuvcet6zCRncxv0FoW6uqod2je0Aa0ZijZvV2FHK2lTE09ULhAQwWA9VkjYfcPJtZAKpLJHtsYGlQDzETAMLT9jLZYQQYqkpmPYe6y8gJJHy2lJ30=
   app: etho-boost
   on:
     repo: Eth-Crowdfund/eth_crowdfund_be
