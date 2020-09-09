@@ -41,14 +41,9 @@ class CampaignTest(unittest.TestCase):
 
     with self.app.app_context():
       # create all db objects
+      db.drop_all()
       db.create_all()
-      # delete test campaigns by name
-      existing_campaign1 = Campaign.get_campaign_by_name(self.campaign1["name"])
-      if existing_campaign1:
-        existing_campaign1.delete()
-      existing_campaign2 = Campaign.get_campaign_by_name(self.campaign2["name"])
-      if existing_campaign2:
-        existing_campaign2.delete()
+
 
   def test_campaign_creation(self):
     # send a request
@@ -122,7 +117,7 @@ class CampaignTest(unittest.TestCase):
     res_index = self.client().get('/api/v1/campaigns/',
                    headers={'Content-Type': 'application/json'})
     json_data = json.loads(res_index.data)
-    self.assertEqual(len(json_data), 3)
+    self.assertEqual(len(json_data), 2)
     self.assertEqual(res_index.status_code, 200)
 
   def test_get_one_campaign(self):
