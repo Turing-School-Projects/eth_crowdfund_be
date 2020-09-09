@@ -74,14 +74,8 @@ class RequestTest(unittest.TestCase):
 
     with self.app.app_context():
       # create all db objects
+      db.drop_all()
       db.create_all()
-      # delete test campaigns by name
-      existing_campaign1 = Campaign.get_campaign_by_name(self.campaign1["name"])
-      if existing_campaign1:
-        existing_campaign1.delete()
-      existing_campaign2 = Campaign.get_campaign_by_name(self.campaign2["name"])
-      if existing_campaign2:
-        existing_campaign2.delete()
 
   def test_request_creation(self):
     # send a request
