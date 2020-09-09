@@ -389,3 +389,14 @@ To make updates to the database and run a new migration, do the following:
     "value": 2.0
 }
 ```
+
+#### Convert Wei to USD
+* Path: `GET http://localhost:3000/api/v1/price_converter?wei={wei_amount}`
+* Requires query params with a key of 'wei' and value of the amount of wei to be converter
+* No body required
+* Example response
+```
+{ 
+    "USD": 357
+}
+```
