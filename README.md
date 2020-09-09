@@ -1,5 +1,5 @@
 # Etherium Crowdfund
-
+## Setup
 <details><summary> Setup </summary>
 
 1. Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine, if you do not have them already
@@ -20,17 +20,19 @@
   => pipenv, version 2020.8.13
   ```
 5. Fork and clone down the repository
-6. Change into the directory `$ cd eth_crowdfund_be/eth_crowdfund_api`
+6. Change into the directory `$ cd eth_crowdfund_be`
 7. You will need to work in a virtual environment. Why? Using a virtual environment for Python projects allows us to have an isolated working copy of Python so we can work on a specific project without worrying about affecting other projects.
-8. Within the `/eth_crowdfund_api` directory:  
+8. Within the `/eth_crowdfund_be` directory:  
  a. Run `# pipenv --three` to create the virtual environment  
  b. Run `$ pipenv shell` to activate the project virtual environment. When you are done working on the project, you should execute `$ exit` to exit the virtual environment  
- c. Run `$ pipenv install flask flask-sqlalchemy psycopg2 flask-migrate flask-script marshmallow flask-bcrypt pyjwt` to install all dependencies  
+ c. Run `$ pipenv install` to install all dependencies from pipfile
  d. Run `$ createdb eth_crowdfund_api_db` to create the app database  
- e. Run
+ e. Add a .env file inside of src containing 
  ```
- $ export FLASK_ENV=development  
- $ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
+FLASK_ENV=development
+SQLALCHEMY_DATABASE_URI="postgresql://postgres:password@localhost/eth_crowdfund_api_db"
+SQLALCHEMY_TEST_DATABASE_URI="postgresql://postgres:password@localhost/eth_crowdfund_api_db_test"
+PORT=3000
  ```
  to set the system environment variables.
  You should now be able to run the app:  
@@ -87,11 +89,9 @@ Path: `eth_crowdfund_be/eth_crowdfund_api`
  
  ### Seeding the Database
  Within the `pipenv shell` virtual environment, do the following:
- 1. Ensure you have the Click package installed by running `$ pipenv install Click`
- 2. Ensure you are at `/eth_crowdfund_be/eth_crowdfund_api`
- 3. Run `$ python3 run.py --seed=True`
- 4. Execute `$ Ctrl + C` to shut down the server and then restart the server with `$ python3 run.py`
- 5. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
+ 1. Ensure you are at `/eth_crowdfund_be`
+ 2. Run `$ python3 run.py --seed=True`
+ 3. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
 
 ### Database Updates
 Path: `eth_crowdfund_be/eth_crowdfund_api`  
