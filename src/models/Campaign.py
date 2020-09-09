@@ -1,11 +1,11 @@
-from marshmallow import fields, Schema 
-import datetime 
+from marshmallow import fields, Schema
+import datetime
 from . import db
 from .Request import RequestSchema
 
 class Campaign(db.Model):
 
-  # table name 
+  # table name
   __tablename__ = 'campaigns'
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String, nullable=False)
@@ -45,29 +45,33 @@ class Campaign(db.Model):
       setattr(self, key, value)
     self.updated_at = datetime.datetime.utcnow()
     db.session.commit()
-  
+
   def delete(self):
     db.session.delete(self)
     db.session.commit()
-  
-  @staticmethod 
+
+  @staticmethod
   def get_all_campaigns():
     return Campaign.query.all()
 
-  @staticmethod 
+  @staticmethod
   def get_one_campaign(id):
     return Campaign.query.get(id)
 
-  @staticmethod 
+  @staticmethod
   def get_campaign_by_name(name):
     return Campaign.query.filter_by(name=name).first()
+
+  @staticmethod
+  def get_campaigns_by_manager(manager):
+      return Campaign.query.filter_by(manager=manager)
 
   def __repr(self):
     return '<id {}>'.format(self.id)
 
 class CampaignSchema(Schema):
   """
-  Campaign Schema 
+  Campaign Schema
   """
   id = fields.Int(dump_only=True)
   name = fields.Str(required=True)
