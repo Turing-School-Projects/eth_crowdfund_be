@@ -14,23 +14,23 @@ def hello():
 
 @campaign_api.route('/', methods=['POST'])
 def create():
-  try: 
+  try:
     req_data = request.get_json()
     data = campaign_schema.load(req_data)
-  except ValidationError as err: 
+  except ValidationError as err:
     return custom_response(err.messages, 400)
-  except: 
+  except:
     return custom_response({ "error": "No input data provided" }, 400)
 
   campaign = Campaign(data)
-  campaign.save() 
+  campaign.save()
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
 
 @campaign_api.route('/<int:campaign_id>', methods=['GET'])
 def get_a_campaign(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
-  if campaign is None: 
+  if campaign is None:
     return custom_response({'error':'Campaign not found'}, 404)
 
   campaign_data = campaign_schema.dump(campaign)
@@ -38,16 +38,16 @@ def get_a_campaign(campaign_id):
 
 @campaign_api.route('/<int:campaign_id>', methods=['PUT'])
 def update(campaign_id):
-  try: 
+  try:
     req_data = request.get_json()
     data = campaign_schema.load(req_data, partial=True)
     campaign = Campaign.get_one_campaign(campaign_id)
     campaign.update(data)
-  except ValidationError as err: 
+  except ValidationError as err:
     return custom_response(err.messages, 400)
-  except exc.IntegrityError as err: 
+  except exc.IntegrityError as err:
     return custom_response({ "error": err.orig.diag.message_detail}, 400)
-  except: 
+  except:
     return custom_response({ "error": "No input data provided" }, 400)
 
   campaign_data = campaign_schema.dump(campaign)
@@ -58,7 +58,7 @@ def update(campaign_id):
 def delete(campaign_id):
   campaign = Campaign.get_one_campaign(campaign_id)
 
-  if campaign is None: 
+  if campaign is None:
     return custom_response({ 'error': 'Campaign not found'}, 404)
 
   campaign.delete()
@@ -76,3 +76,14 @@ def get_all_campaigns():
   for campaign in campaigns:
     campaign_data.append(campaign_schema.dump(campaign))
   return custom_response(campaign_data, 200)
+
+@campaign_api.route('/manager/<manager>', methods=['GET'])
+def get_campaigns_by_manager(manager):
+  campaigns = Campaign.get_campaigns_by_manager(manager)
+  campaign_data = []
+  for campaign in campaigns:
+    campaign_data.append(campaign_schema.dump(campaign))
+  if campaign_data == []:
+    return custom_response({'error': 'The entered manager has no campaigns'}, 404)
+  else:
+    return custom_response(campaign_data, 200)
