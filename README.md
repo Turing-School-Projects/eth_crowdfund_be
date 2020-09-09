@@ -1,6 +1,6 @@
 # Etherium Crowdfund
 
-## Setup
+<details><summary> Setup </summary>
 
 1. Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine, if you do not have them already
   * To install Pipenv on a Mac, you can run `$ brew install pipenv`
@@ -49,8 +49,10 @@
   ```
  10. In your browser, navigate to http://localhost:3000/ and you should see `Etherium for life`  
  11. To stop the server, `ctrl + c`
+</details> 
 
-### Database Setup
+<details><summary> Database Setup </summary> 
+ 
 Path: `eth_crowdfund_be/eth_crowdfund_api`
 
  1. Delete the `/migrations` directory
@@ -102,9 +104,11 @@ To make updates to the database and run a new migration, do the following:
 
 * Note: If you encounter any root errors, such as `ERROR [root] Error: Target database is not up to date.` or `ERROR [root] Error: Relative revision -1 didn't produce 1 migrations`, run `$ python3 manage.py db stamp head` to reset the target database to your current database head.
 
+</details> 
+
 ## API Endpoints
 
-### Campaigns
+<details><summary> Campaigns </summary> 
 
 #### Create a campaign
 
@@ -262,7 +266,10 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 4
 }
 ```
-### Requests
+</details> 
+
+<details><summary> Requests </summary>
+ 
 #### Create a Request
 * Path `POST http://localhost:3000/api/v1/requests/`
 * Example JSON post body. `campaign_id`, `value`, and `recipient` are required.
@@ -389,3 +396,5 @@ To make updates to the database and run a new migration, do the following:
     "value": 2.0
 }
 ```
+</details> 
+
