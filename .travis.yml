@@ -1,16 +1,15 @@
 language: python
 python:
-- 3.8.5
+- 3.8
 addons:
   postgresql: '12.3'
 services:
-- postgresql
+  - postgresql
 install:
-- pip install -r requirements.txt
+  - pip install pipenv
+  - pipenv install
 script:
-- pipenv install flask_script
-- python manage.py db migrate
-- python manage.py db upgrade
+  - pytest
 deploy:
   provider: heroku
   api_key:
