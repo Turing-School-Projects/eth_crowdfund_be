@@ -94,6 +94,9 @@ def add_contributor_to_campaign(campaign_address, contributor_address):
   try:
     campaign = Campaign.get_campaign_by_address(campaign_address).first()
     contributor = Contributor.get_contributor_by_address(contributor_address).first()
+    if contributor == None:
+        contributor = Contributor({"address": contributor_address})
+        contributor.save()
     campaign.contributors.append(contributor)
     campaign.save()
   except ValidationError as err:
