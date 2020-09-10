@@ -3,7 +3,7 @@
 - [Database Setup](#database-setup)
 - [Seeding The Database](#seeding-the-database)
 - [Updating The Database](#database-updates)
-- [API Endpoings](#api-endpoints)
+- [API Endpoints](#api-endpoints)
 
 ## Setup <a name="setup"></a>
 <details>
@@ -454,7 +454,7 @@ To make updates to the database and run a new migration, run the following:
 
 <details>
   <summary> Convert Wei to USD </summary>
-  
+
 * Path: `GET http://localhost:3000/api/v1/price_converter?wei={wei_amount}`
 * Requires query params with a key of 'wei' and value of the amount of wei to be converter
 * No body required
