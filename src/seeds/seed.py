@@ -63,7 +63,8 @@ def add_seeds(seed):
         'image': 'https://picsum.photos/200/300',
         'value': 100, 
         'recipient': 'kfh7DFh38H',
-        'approvals': 0, 
+        'approvals': 0,
+        'eth_id': 0,
         
     }
 
@@ -73,7 +74,8 @@ def add_seeds(seed):
         'image': 'https://picsum.photos/200/300',
         'value': 250, 
         'recipient': 'JHh7734utg8ds7H',
-        'approvals': 0, 
+        'approvals': 0,
+        'eth_id': 0,
         
     }
 
@@ -84,6 +86,7 @@ def add_seeds(seed):
         'value': 25, 
         'recipient': 'jhF97hdfha97',
         'approvals': 0, 
+        'eth_id': 0,
         
     }
 
