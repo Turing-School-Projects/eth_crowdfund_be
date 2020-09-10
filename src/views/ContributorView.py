@@ -44,23 +44,23 @@ def create():
 #   campaign_request_data = request_schema.dump(campaign_request)
 #   return custom_response(campaign_request_data, 200)
 #
-# @request_api.route('/<int:request_id>', methods=['PUT'])
-# def update(request_id):
-#
-#   try:
-#     req_data = request.get_json()
-#     data = request_schema.load(req_data, partial=True)
-#     campaign_request = Request.get_one_request(request_id)
-#     campaign_request.update(data)
-#   except ValidationError as err:
-#     return custom_response(err.messages, 400)
-#   except exc.IntegrityError as err:
-#     return custom_response({ "error": err.orig.diag.message_detail }, 400)
-#   except:
-#     return custom_response({ "error": "No input data provided" }, 400)
-#
-#   request_data = request_schema.dump(campaign_request)
-#   return custom_response(request_data, 200)
+@contributor_api.route('/<int:contributor_id>', methods=['PUT'])
+def update(contributor_id):
+
+  try:
+    input_data = request.get_json()
+    data = contributor_schema.load(input_data, partial=True)
+    contributor_request = Contributor.get_one_contributor(contributor_id)
+    contributor_request.update(data)
+  except ValidationError as err:
+    return custom_response(err.messages, 400)
+  except exc.IntegrityError as err:
+    return custom_response({ "error": err.orig.diag.message_detail }, 400)
+  except:
+    return custom_response({ "error": "No input data provided" }, 400)
+
+  output_data = contributor_schema.dump(contributor_request)
+  return custom_response(output_data, 200)
 #
 # @request_api.route('/<int:request_id>', methods=['DELETE'])
 # def delete(request_id):

@@ -38,36 +38,29 @@ class ContributorTest(unittest.TestCase):
     res = self.client().post('/api/v1/contributor/',
                               headers={'Content-Type': 'application/json'},
                               data=json.dumps(self.contributor1))
+    self.assertEqual(res.status_code, 201)
     json_data = json.loads(res.data)
-    # check the names. I'd prefer to have a simpler call, but there are a few differences that prevent self.campaign1 == json_data
     self.assertEqual(self.contributor1["address"], json_data["address"])
     self.assertEqual(self.contributor1["email"], json_data["email"])
-#
-#   def test_campaign_update(self):
-#     campaign1_update = {
-#       "description": "new description",
-#       "manager": "1x3y",
-#       "value": 213.79
-#     }
-#     # create the campaign before updating
-#     res = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign1))
-#     self.assertEqual(res.status_code, 201)
-#     campaign1_id = json.loads(res.data)["id"]
-#     # save the id and update campaign
-#     res_update = self.client().put('/api/v1/campaigns/{}'.format(campaign1_id),
-#                             headers={'Content-Type': 'application/json'},
-#                             data=json.dumps(campaign1_update))
-#
-#     json_data = json.loads(res_update.data)
-#     self.assertEqual(self.campaign1["name"], json_data["name"])
-#     self.assertNotEqual(self.campaign1["description"], json_data["description"])
-#     self.assertEqual(campaign1_update["description"], json_data["description"])
-#     self.assertNotEqual(self.campaign1["manager"], json_data["manager"])
-#     self.assertEqual(campaign1_update["manager"], json_data["manager"])
-#     self.assertEqual(213.79, json_data["value"])
-#     self.assertEqual(res_update.status_code, 200)
+
+  def test_contributor_update(self):
+    contributor2_update = {
+      "email": 'update@email.com'
+    }
+    response = self.client().post('/api/v1/contributor/',
+                             headers={'Content-Type': 'application/json'},
+                             data=json.dumps(self.contributor2))
+    self.assertEqual(response.status_code, 201)
+    
+    contributor2_id = json.loads(response.data)["id"]
+    updated_response = self.client().put('/api/v1/contributor/{}'.format(contributor2_id),
+                            headers={'Content-Type': 'application/json'},
+                            data=json.dumps(contributor2_update))
+
+    self.assertEqual(updated_response.status_code, 200)
+    json_data = json.loads(updated_response.data)
+    self.assertEqual("update@email.com", json_data["email"])
+    self.assertNotEqual("test@email.com", json_data["email"])
 #
 #   def test_delete(self):
 #     res = self.client().post('/api/v1/campaigns/',
