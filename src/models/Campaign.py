@@ -2,6 +2,8 @@ from marshmallow import fields, Schema
 import datetime
 from . import db
 from .Request import RequestSchema
+from .CampaignContributor import CampaignContributorSchema
+from .Contributor import ContributorSchema
 
 class Campaign(db.Model):
 
@@ -12,7 +14,6 @@ class Campaign(db.Model):
   description = db.Column(db.Text)
   image = db.Column(db.String)
   manager = db.Column(db.String, nullable=False)
-  contributors = db.Column(db.Integer)
   upvote = db.Column(db.Integer)
   min_contribution = db.Column(db.Float, nullable=False)
   value = db.Column(db.Float)
@@ -29,7 +30,6 @@ class Campaign(db.Model):
     self.description = data.get('description')
     self.image = data.get('image')
     self.manager = data.get('manager')
-    self.contributors = data.get('contributors')
     self.upvote = data.get('upvote')
     self.min_contribution = data.get('min_contribution')
     self.value = data.get('value')
@@ -80,7 +80,6 @@ class CampaignSchema(Schema):
   description = fields.Str(required=False)
   image = fields.Str(required=False)
   manager = fields.Str(required=True)
-  contributors = fields.Int(required=False)
   upvote = fields.Int(required=False)
   min_contribution = fields.Float(required=True)
   value = fields.Float(required=False)

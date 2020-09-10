@@ -6,85 +6,82 @@ import click
 @click.command()
 @click.option('--seed', default=False, help='Seed database?')
 def add_seeds(seed):
-    if seed == False: 
-        return 
-    
+    if seed == False:
+        return
+
     click.echo('Seeding...')
 
 #  Campaign Seeds
     campaign1 = {
-        'name': 'Build a Well', 
-        'description': 'A small town in South Africa needs a well for clean water', 
+        'name': 'Build a Well',
+        'description': 'A small town in South Africa needs a well for clean water',
         # Uses lorem picsum for random pics
-        'image': 'https://picsum.photos/200/300', 
+        'image': 'https://picsum.photos/200/300',
         # Manager is a random string
         'manager': 'X5JT498FJeklnsd8382hf',
-        'contributors': 25,
-        'upvote': 50, 
-        'min_contribution': 1.5, 
-        # Address is a random string 
-        'address': 'FjSDh482hfjGE77dk', 
+        'upvote': 50,
+        'min_contribution': 1.5,
+        # Address is a random string
+        'address': 'FjSDh482hfjGE77dk',
         'expiration': '10/25/2020'
     }
 
     campaign2 = {
-        'name': 'Market St. Soup Kitchen', 
-        'description': 'Need help serving community', 
+        'name': 'Market St. Soup Kitchen',
+        'description': 'Need help serving community',
         # Uses lorem picsum for random pics
-        'image': 'https://picsum.photos/200/300', 
+        'image': 'https://picsum.photos/200/300',
         # Manager is a random string
         'manager': 'LJHhf82u3hr0d9uhUg4g',
-        'contributors': 25,
-        'upvote': 50, 
-        'min_contribution': 1.5, 
-        # Address is a random string 
-        'address': 'Hf84jhGE9fdjF9ehfdse45', 
+        'upvote': 50,
+        'min_contribution': 1.5,
+        # Address is a random string
+        'address': 'Hf84jhGE9fdjF9ehfdse45',
         'expiration': '10/25/2020'
     }
 
     campaign3 = {
-        'name': 'Arc Thrift', 
-        'description': 'Serving communities hit hard by Covid19', 
+        'name': 'Arc Thrift',
+        'description': 'Serving communities hit hard by Covid19',
         # Uses lorem picsum for random pics
-        'image': 'https://picsum.photos/200/300', 
+        'image': 'https://picsum.photos/200/300',
         # Manager is a random string
         'manager': 'jhF8dfh4jjgfdkjs45',
-        'contributors': 25,
-        'upvote': 50, 
-        'min_contribution': 1.5, 
-        # Address is a random string 
-        'address': 'DFjh489GD74hgls8', 
+        'upvote': 50,
+        'min_contribution': 1.5,
+        # Address is a random string
+        'address': 'DFjh489GD74hgls8',
         'expiration': '10/25/2020'
     }
 
     request1= {
-        'campaign_id': 0, 
+        'campaign_id': 0,
         'description': 'Buy supplies',
         'image': 'https://picsum.photos/200/300',
-        'value': 100, 
+        'value': 100,
         'recipient': 'kfh7DFh38H',
         'approvals': 0,
-        
+
     }
 
     request2= {
-        'campaign_id': 0, 
+        'campaign_id': 0,
         'description': 'Lunch for volunteers',
         'image': 'https://picsum.photos/200/300',
-        'value': 250, 
+        'value': 250,
         'recipient': 'JHh7734utg8ds7H',
         'approvals': 0,
-        
+
     }
 
     request3= {
-        'campaign_id': 0, 
+        'campaign_id': 0,
         'description': 'Cleaning supplies',
         'image': 'https://picsum.photos/200/300',
-        'value': 25, 
+        'value': 25,
         'recipient': 'jhF97hdfha97',
-        'approvals': 0, 
-        
+        'approvals': 0,
+
     }
 
 
@@ -110,4 +107,4 @@ def add_seeds(seed):
     db.session.commit()
 
     click.echo('Finished Seeding')
-    return 
+    return
