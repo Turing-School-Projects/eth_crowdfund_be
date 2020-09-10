@@ -22,8 +22,19 @@ class ContributorTest(unittest.TestCase):
         "address": "AaBbCc9"
     }
 
+    self.campaign1 = {
+        "name": "Test Campaign",
+        "description": "test campaign description",
+        "image": "test.jpg",
+        "upvote": 2,
+        "manager": "XYZ",
+        "address": "X73K",
+        "min_contribution": 5.0
+    }
+
     with self.app.app_context():
       # create all db objects
+      db.drop_all()
       db.create_all()
       # delete test campaigns by name
       existing_contributor1 = Contributor.get_contributor_by_address(self.contributor1["address"])
@@ -61,95 +72,33 @@ class ContributorTest(unittest.TestCase):
     json_data = json.loads(updated_response.data)
     self.assertEqual("update@email.com", json_data["email"])
     self.assertNotEqual("test@email.com", json_data["email"])
-#
-#   def test_delete(self):
-#     res = self.client().post('/api/v1/campaigns/',
-#                               headers={'Content-Type': 'application/json'},
-#                               data=json.dumps(self.campaign1))
-#     self.assertEqual(res.status_code, 201)
-#     campaign1_id = json.loads(res.data)["id"]
-#
-#     # delete campaign
-#     res_delete = self.client().delete('/api/v1/campaigns/{}'.format(campaign1_id), headers={'Content-Type': 'application/json'})
-#     self.assertEqual(res_delete.status_code, 200)
-#
-#   def test_get_all_campaigns(self):
-#     # create 2 campaigns
-#     res1 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign1))
-#     self.assertEqual(res1.status_code, 201)
-#     res2 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign2))
-#     self.assertEqual(res2.status_code, 201)
-#
-#
-#     res_index = self.client().get('/api/v1/campaigns/',
-#                    headers={'Content-Type': 'application/json'})
-#     json_data = json.loads(res_index.data)
-#     self.assertEqual(len(json_data), 3)
-#     self.assertEqual(res_index.status_code, 200)
-#
-#   def test_get_one_campaign(self):
-#     # create 2 campaigns
-#     res1 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign1))
-#     self.assertEqual(res1.status_code, 201)
-#     campaign1_id = json.loads(res1.data)["id"]
-#
-#     res2 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign2))
-#     self.assertEqual(res2.status_code, 201)
-#   # GETTING A `308 Redirect` error. not sure why. works correctly on postman
-#     res_show = self.client().get('/api/v1/campaigns/{}'.format(campaign1_id),
-#                                  headers={'Content-Type': 'application/json'})
-#     self.assertEqual(res_show.status_code, 200)
-#     json_data = json.loads(res_show.data)
-#     self.assertEqual(self.campaign1["name"], json_data["name"])
-#     self.assertNotEqual(self.campaign2["name"], json_data["name"])
-#     self.assertEqual(self.campaign1["description"], json_data["description"])
-#     self.assertNotEqual(self.campaign2["description"], json_data["description"])
-#     self.assertEqual(self.campaign1["manager"], json_data["manager"])
-#     self.assertNotEqual(self.campaign2["manager"], json_data["manager"])
-#     self.assertEqual(self.campaign1["address"], json_data["address"])
-#     self.assertEqual(self.campaign1["min_contribution"], json_data["min_contribution"])
-#     self.assertNotEqual(self.campaign2["min_contribution"], json_data["min_contribution"])
-#
-#   def test_campaigns_by_manager(self):
-#     # create 2 campaigns
-#     res1 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign1))
-#     self.assertEqual(res1.status_code, 201)
-#     res2 = self.client().post('/api/v1/campaigns/',
-#                              headers={'Content-Type': 'application/json'},
-#                              data=json.dumps(self.campaign2))
-#     self.assertEqual(res2.status_code, 201)
-#
-#
-#     res_index = self.client().get('/api/v1/campaigns/manager/13',
-#                    headers={'Content-Type': 'application/json'},
-#                    )
-#
-#     self.assertEqual(res_index.status_code, 200)
-#     json_data = json.loads(res_index.data)
-#
-#     self.assertEqual(len(json_data), 1)
-#     self.assertEqual(self.campaign2["name"], json_data[0]["name"])
-#     self.assertEqual(self.campaign2["description"], json_data[0]["description"])
-#     self.assertEqual(self.campaign2["image"], json_data[0]["image"])
-#     self.assertEqual(self.campaign2["upvote"], json_data[0]["upvote"])
-#     self.assertEqual(self.campaign2["manager"], json_data[0]["manager"])
-#     self.assertEqual(self.campaign2["address"], json_data[0]["address"])
-#     self.assertEqual(self.campaign2["min_contribution"], json_data[0]["min_contribution"])
-#
-#     #sad path test
-#     res_index = self.client().get('/api/v1/campaigns/manager/k',
-#                    headers={'Content-Type': 'application/json'},
-#                    )
-#     self.assertEqual(res_index.status_code, 404)
-#     json_data = json.loads(res_index.data)
-#     self.assertEqual("The entered manager has no campaigns", json_data["error"])
+
+  def test_get_campaigns(self):
+    create_contributor = self.client().post('/api/v1/contributor/',
+                              headers={'Content-Type': 'application/json'},
+                              data=json.dumps(self.contributor1))
+    self.assertEqual(create_contributor.status_code, 201)
+
+    create_campaign = self.client().post('/api/v1/campaigns/',
+                              headers={'Content-Type': 'application/json'},
+                              data=json.dumps(self.campaign1))
+    self.assertEqual(create_campaign.status_code, 201)
+
+    add_contributor_to_campaign = self.client().post('/api/v1/campaigns/X73K/contributor/XyZpekdA',
+                              headers={'Content-Type': 'application/json'},
+                               )
+    self.assertEqual(add_contributor_to_campaign.status_code, 201)
+
+    get_campaigns = self.client().get('/api/v1/contributor/XyZpekdA/campaigns',
+                              headers={'Content-Type': 'application/json'},
+                               )
+
+    self.assertEqual(get_campaigns.status_code, 200)
+    json_response = json.loads(get_campaigns.data)
+    self.assertEqual('Test Campaign', json_response[0]['name'])
+    self.assertEqual('test campaign description', json_response[0]['description'])
+    self.assertEqual('test.jpg', json_response[0]['image'])
+    self.assertEqual(2, json_response[0]['upvote'])
+    self.assertEqual('XYZ', json_response[0]['manager'])
+    self.assertEqual('X73K', json_response[0]['address'])
+    self.assertEqual(5.0, json_response[0]['min_contribution'])
