@@ -19,6 +19,3 @@ deploy:
   run: python manage.py db stamp head
   run: python manage.py db migrate
   run: python manage.py db upgrade
-  on:
-    repo: Eth-Crowdfund/eth_crowdfund_be
-  skip_cleanup: 'true'
