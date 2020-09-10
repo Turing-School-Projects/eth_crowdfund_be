@@ -2,6 +2,7 @@ from flask import request, json, Response, Blueprint, g, jsonify
 from marshmallow import ValidationError
 from sqlalchemy import exc
 from ..models.Request import Request, RequestSchema
+from ..models.Campaign import Campaign, CampaignSchema
 from . import custom_response
 
 
@@ -10,8 +11,12 @@ request_schema = RequestSchema()
 
 @request_api.route('/', methods=['POST'])
 def create():
+  
   try: 
     req_data = request.get_json()
+    # get number of campaign requests
+    campaign = Campaign.get_one_campaign(req_data['campaign_id'])
+    req_data['eth_id'] = len(campaign.requests)
     data = request_schema.load(req_data)
   except ValidationError as err:
     return custom_response(err.messages, 400)

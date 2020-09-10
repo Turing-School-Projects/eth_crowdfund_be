@@ -19,6 +19,7 @@ class Request(db.Model):
   approved = db.Column(db.Boolean, default=False)
   finalized = db.Column(db.Boolean, default=False)
   approvals = db.Column(db.Integer)
+  eth_id = db.Column(db.Integer)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
   campaign = db.relationship('Campaign')
@@ -36,6 +37,7 @@ class Request(db.Model):
     self.approved = data.get('approved')
     self.finalized = data.get('finalized')
     self.approvals = data.get('approvals')
+    self.eth_id = data.get('eth_id')
     self.created_at = datetime.datetime.utcnow()
     self.updated_at = datetime.datetime.utcnow()
 
@@ -74,5 +76,6 @@ class RequestSchema(Schema):
   approved = fields.Bool(required=False)
   finalized = fields.Bool(required=False)
   approvals = fields.Int(required=False)
+  eth_id = fields.Int(required=False)
   created_at = fields.DateTime(dump_only=True)
   updated_at = fields.DateTime(dump_only=True)

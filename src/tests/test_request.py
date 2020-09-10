@@ -181,3 +181,6 @@ class RequestTest(unittest.TestCase):
 
     self.assertEqual(self.request2["description"], json_data2["description"])
     self.assertNotEqual(self.request1["description"], json_data2["description"])
+
+    self.assertEqual(0, json_data1["eth_id"])
+    self.assertEqual(1, json_data2["eth_id"])
