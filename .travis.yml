@@ -1,0 +1,20 @@
+language: python
+python:
+- '3.8'
+services:
+- postgresql
+install:
+- pip install pipenv
+- pipenv install
+before_script:
+- psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
+script:
+- pytest
+deploy:
+  provider: heroku
+  api_key:
+    secure: bSrVTY2bsARzk33CjRZpfeUY5dIG19h0UkG+93qpADOCXSnLcsx8HpXPcU4M4NVhIetxDzASfImeuJqX2NAqqOaopxzh9UQ4rdktcALz4q2/58q5QFB5qLznMPb8UpkDZJ1pGpLldwNlOStMasJ9UAMfRycHEkeCuL37BBUSMtios+OyKrnsvw1HRK2xME9VGDPYvl8n7e455nsS7jeuK1QZgmKhcG/IMwjGWDA7mm1BDDwkGGKmecKPyReRTKryTmWuBRPj2x903TJSo3IwOKBLZSWOOdqF2FFQDn7b/83bJ/9Sf4G5hM9CLHjTb16UZOApSv8D3fhA7Pvo51lpaQDrUKWA6TRHuVp1i0QQYslMxIoWOnvPw3MAEmp8dliXvU+iiBPmUatGBwhC+hgM7E604ZM9j3zm3+6GHMyo4CtYwOwXNYwCXMRHksyL6sydHPwTMjRjXo73/05xoL8HlBcYtBnlfC/GStM8/y60Sh25kzW7V3VEHAKpsFMblNlUEaZSzW5OVqwOS0v0lnV4REkWmCYnMEsv2l3SxnLKwhTZUqYDcU7nenaQ8VmOWOmCX4PYqtubruTyRUW7MC+t6LCLLo7JXkOhZt7/EnhWSBxBduDK+kC7vmzcITxFLVGDBwb/MKeM7zoTOLFsvxosMrN5r90G5J5SdUlUYJYO1QU=
+  app: etho-boost
+  on:
+    repo: Eth-Crowdfund/eth_crowdfund_be
+  skip_cleanup: 'true'
