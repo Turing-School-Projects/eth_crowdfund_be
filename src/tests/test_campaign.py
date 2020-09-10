@@ -68,7 +68,8 @@ class CampaignTest(unittest.TestCase):
     campaign1_update = {
       "description": "new description",
       "contributors": 5,
-      "manager": "1x3y"
+      "manager": "1x3y",
+      "value": 213.79
     }
     # create the campaign before updating
     res = self.client().post('/api/v1/campaigns/',
@@ -89,6 +90,7 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(campaign1_update["contributors"], json_data["contributors"])
     self.assertNotEqual(self.campaign1["manager"], json_data["manager"])
     self.assertEqual(campaign1_update["manager"], json_data["manager"])
+    self.assertEqual(213.79, json_data["value"])
     self.assertEqual(res_update.status_code, 200)
 
   def test_delete(self):
