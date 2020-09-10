@@ -4,7 +4,7 @@ from sqlalchemy import exc
 from ..models.Request import Request, RequestSchema
 from ..models.Campaign import Campaign, CampaignSchema
 from . import custom_response
-
+from ..mailers.mailer import request_notification
 
 request_api = Blueprint('requests_api', __name__)
 request_schema = RequestSchema()
@@ -25,6 +25,9 @@ def create():
 
   request_info = Request(data)
   request_info.save()
+  # Sends emails. Needs to be updated to use contributor emails for this request's campaign
+  request_notification(['potoj73985@oramail.net'], 'Test Link')
+
   request_data = request_schema.dump(request_info)
   return custom_response(request_data, 201)
 
