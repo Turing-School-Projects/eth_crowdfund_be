@@ -95,6 +95,7 @@ def add_contributor_to_campaign(campaign_address, contributor_address):
     campaign = Campaign.get_campaign_by_address(campaign_address).first()
     contributor = Contributor.get_contributor_by_address(contributor_address).first()
     campaign.contributors.append(contributor)
+    campaign.save()
   except ValidationError as err:
     return custom_response(err.messages, 400)
   except exc.IntegrityError as err:
