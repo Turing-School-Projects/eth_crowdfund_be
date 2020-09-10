@@ -1,14 +1,10 @@
 language: python
 python:
-- 3.8
-addons:
-  postgresql: '12'
-  apt: 
-    packages: 
-      - postgresql-12
-      - postgresql-client
+  - 3.8
 services:
   - postgresql
+  adons: 
+    postgresql: "12.3"
 install:
   - pip install pipenv
   - pipenv install
