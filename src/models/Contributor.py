@@ -11,7 +11,7 @@ class Contributor(db.Model):
   # table name
   __tablename__ = 'contributor'
   id = db.Column(db.Integer, primary_key=True)
-  address = db.Column(db.String, nullable=False)
+  address = db.Column(db.String, unique=True, nullable=False)
   email = db.Column(db.String)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
