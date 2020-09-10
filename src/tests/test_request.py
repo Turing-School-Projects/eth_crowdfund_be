@@ -76,34 +76,156 @@ class RequestTest(unittest.TestCase):
       # create all db objects
       db.drop_all()
       db.create_all()
+      res = self.client().post('/api/v1/campaigns/',
+                         headers={'Content-Type': 'application/json'},
+                         data=json.dumps(self.campaign1))
+      self.campaign1_id = json.loads(res.data)["id"]
+      res = self.client().post('/api/v1/campaigns/',
+                         headers={'Content-Type': 'application/json'},
+                         data=json.dumps(self.campaign2))
+      self.campaign2_id = json.loads(res.data)["id"]
 
-  def test_request_creation(self):
-    # send a request
-    res = self.client().post('/api/v1/campaigns/',
-                              headers={'Content-Type': 'application/json'},
-                              data=json.dumps(self.campaign1))
-    self.assertEqual(res.status_code, 201)
-    campaign_id = json.loads(res.data)["id"]
-
-    request = {
-        'campaign_id': campaign_id,
-        'description': 'Buy supplies',
-        'image': 'https://picsum.photos/200/300',
-        'value': 100,
-        'recipient': 'kfh7DFh38H',
-        'approvals': 0,
-
-    }
-
-    res = self.client().post('/api/v1/requests/',
-                              headers={'Content-Type': 'application/json'},
-                              data=json.dumps(request))
-    self.assertEqual(res.status_code, 201)
+  def test_campaign_creation_in_setup(self):
+    res = self.client().get('/api/v1/campaigns/', headers={'Content-Type': 'application/json'})
     json_data = json.loads(res.data)
+    self.assertEqual(len(json_data), 2)
 
-    self.assertEqual(request["campaign_id"], json_data["campaign_id"])
-    self.assertEqual(request["description"], json_data["description"])
-    self.assertEqual(request["image"], json_data["image"])
-    self.assertEqual(request["value"], json_data["value"])
-    self.assertEqual(request["recipient"], json_data["recipient"])
-    self.assertEqual(request["approvals"], json_data["approvals"])
+  
+  def test_request_creation(self):
+    self.request1['campaign_id'] = self.campaign1_id
+    res = self.client().post('/api/v1/requests/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
+    json_data = json.loads(res.data)
+    self.assertEqual(res.status_code, 201)
+
+    self.assertEqual(self.request1["campaign_id"], json_data["campaign_id"])
+    self.assertEqual(self.request1["description"], json_data["description"])
+    self.assertEqual(self.request1["image"], json_data["image"])
+    self.assertEqual(self.request1["value"], json_data["value"])
+    self.assertEqual(self.request1["recipient"], json_data["recipient"])
+    self.assertEqual(self.request1["approvals"], json_data["approvals"])
+  
+  def test_request_update(self):
+    self.request1['campaign_id'] = self.campaign1_id
+    res = self.client().post('/api/v1/requests/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
+    request1_id = json.loads(res.data)['id']
+
+    request1_update = {
+        'description': 'new description',
+        'value': 999,
+        'recipient': 'dog',
+    }
+    res = self.client().put(f'/api/v1/requests/{request1_id}',
+                             headers={'Content-Type': 'application/json'}, data=json.dumps(request1_update))
+    json_data = json.loads(res.data)
+    self.assertEqual(res.status_code, 200)
+
+    self.assertEqual(self.request1["campaign_id"], json_data["campaign_id"])
+    self.assertNotEqual(self.request1["description"], json_data["description"])
+    self.assertEqual(request1_update["description"], json_data["description"])
+    self.assertEqual(self.request1["image"], json_data["image"])
+    self.assertNotEqual(self.request1["value"], json_data["value"])
+    self.assertEqual(request1_update["value"], json_data["value"])
+    self.assertNotEqual(self.request1["recipient"], json_data["recipient"])
+    self.assertEqual(request1_update["recipient"], json_data["recipient"])
+    self.assertEqual(self.request1["approvals"], json_data["approvals"])
+
+  def test_request_delete(self):
+    self.request1['campaign_id'] = self.campaign1_id
+    res = self.client().post('/api/v1/requests/',
+                             headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
+    request1_id = json.loads(res.data)['id']
+
+    self.request2['campaign_id'] = self.campaign1_id
+    res = self.client().post('/api/v1/requests/',
+                             headers={'Content-Type': 'application/json'}, data=json.dumps(self.request2))
+
+    res_index = self.client().get(
+        '/api/v1/requests/', headers={'Content-Type': 'application/json'})
+    json_data = json.loads(res_index.data)
+
+    self.assertEqual(len(json_data), 2)
+
+    res_delete = self.client().delete('/api/v1/requests/{}'.format(request1_id),
+                                      headers={'Content-Type': 'application/json'})
+    self.assertEqual(res_delete.status_code, 200)
+
+    res_index = self.client().get('/api/v1/requests/', headers={'Content-Type': 'application/json'})
+    json_data = json.loads(res_index.data)
+    self.assertEqual(len(json_data), 1)
+
+  def test_one_request(self):
+    self.request1['campaign_id'] = self.campaign1_id
+    res1 = self.client().post('/api/v1/requests/',
+                             headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
+    request1_id = json.loads(res1.data)['id']
+
+    self.request2['campaign_id'] = self.campaign1_id
+    res2 = self.client().post('/api/v1/requests/',
+                             headers={'Content-Type': 'application/json'}, data=json.dumps(self.request2))
+    request2_id = json.loads(res2.data)['id']
+
+    res1_get = self.client().get('/api/v1/requests/{}'.format(request1_id), headers={'Content-Type': 'application/json'})
+    json_data1 = json.loads(res1_get.data)
+
+    res2_get = self.client().get('/api/v1/requests/{}'.format(request2_id), headers={'Content-Type': 'application/json'})
+    json_data2 = json.loads(res2_get.data)
+
+    self.assertEqual(self.request1["value"], json_data1["value"])
+    self.assertNotEqual(self.request2["value"], json_data1["value"])
+    
+    self.assertEqual(self.request2["value"], json_data2["value"])
+    self.assertNotEqual(self.request1["value"], json_data2["value"])
+
+    self.assertEqual(self.request1["description"], json_data1["description"])
+    self.assertNotEqual(self.request2["description"], json_data1["description"])
+
+    self.assertEqual(self.request2["description"], json_data2["description"])
+    self.assertNotEqual(self.request1["description"], json_data2["description"])
+
+    
+
+
+
+
+
+    
+
+    # send a request
+    # res = self.client().post('/api/v1/campaigns/',
+    #                           headers={'Content-Type': 'application/json'},
+    #                           data=json.dumps(self.campaign1))
+    # self.assertEqual(res.status_code, 201)
+    # campaign_id = json.loads(res.data)["id"]
+
+    # request = {
+    #     'campaign_id': campaign_id,
+    #     'description': 'Buy supplies',
+    #     'image': 'https://picsum.photos/200/300',
+    #     'value': 100,
+    #     'recipient': 'kfh7DFh38H',
+    #     'approvals': 0,
+
+    # }
+
+    # res = self.client().post('/api/v1/requests/',
+    #                           headers={'Content-Type': 'application/json'},
+    #                           data=json.dumps(request))
+    # self.assertEqual(res.status_code, 201)
+    # json_data = json.loads(res.data)
+
+    # self.assertEqual(request["campaign_id"], json_data["campaign_id"])
+    # self.assertEqual(request["description"], json_data["description"])
+    # self.assertEqual(request["image"], json_data["image"])
+    # self.assertEqual(request["value"], json_data["value"])
+    # self.assertEqual(request["recipient"], json_data["recipient"])
+    # self.assertEqual(request["approvals"], json_data["approvals"])
+
+  # def update_request(self):
+  #   request1_update = {
+  #       'campaign_id': 0,
+  #       'description': 'Buy supplies',
+  #       'image': 'https://picsum.photos/200/300',
+  #       'value': 100,
+  #       'recipient': 'kfh7DFh38H',
+  #       'approvals': 0,
+  #   }
