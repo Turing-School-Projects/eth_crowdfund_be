@@ -9,19 +9,14 @@ install:
 before_script:
 - psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
 script:
-- python manage.py db stamp head 
-- python manage.py db migrate
-- python manage.py db upgrade
 - pytest
 deploy:
   provider: heroku
   api_key:
-    secure: bSrVTY2bsARzk33CjRZpfeUY5dIG19h0UkG+93qpADOCXSnLcsx8HpXPcU4M4NVhIetxDzASfImeuJqX2NAqqOaopxzh9UQ4rdktcALz4q2/58q5QFB5qLznMPb8UpkDZJ1pGpLldwNlOStMasJ9UAMfRycHEkeCuL37BBUSMtios+OyKrnsvw1HRK2xME9VGDPYvl8n7e455nsS7jeuK1QZgmKhcG/IMwjGWDA7mm1BDDwkGGKmecKPyReRTKryTmWuBRPj2x903TJSo3IwOKBLZSWOOdqF2FFQDn7b/83bJ/9Sf4G5hM9CLHjTb16UZOApSv8D3fhA7Pvo51lpaQDrUKWA6TRHuVp1i0QQYslMxIoWOnvPw3MAEmp8dliXvU+iiBPmUatGBwhC+hgM7E604ZM9j3zm3+6GHMyo4CtYwOwXNYwCXMRHksyL6sydHPwTMjRjXo73/05xoL8HlBcYtBnlfC/GStM8/y60Sh25kzW7V3VEHAKpsFMblNlUEaZSzW5OVqwOS0v0lnV4REkWmCYnMEsv2l3SxnLKwhTZUqYDcU7nenaQ8VmOWOmCX4PYqtubruTyRUW7MC+t6LCLLo7JXkOhZt7/EnhWSBxBduDK+kC7vmzcITxFLVGDBwb/MKeM7zoTOLFsvxosMrN5r90G5J5SdUlUYJYO1QU=
+    secure: cKtlwWdWMob1rIr9bwBSfFUXGcqDbTUKSa97vF5B1J5wLNv2SMcjs57Bfq3SVkXEKv98+C+Ps7k8oGdQzHSsaOJ6lLbQG/TLbslY+G60P6IrNtmEu4qBWfDxL8WdWMXGLAXqn+Gr+lk3SyhuRxMBuoI1t5j3G5+eqmJWAdjB9S122WxznC7F7vzQyGGctV7Vmz5Fr0pKVRDUacIUtSu854QP384JRlncIU0MScLhiFE5ifnct/kZ0NzaF9N1f83lKgqExWBAHf49Y4UvKwdB7Yk+L9dvsQO7V8L0fWz0MP+9LVvD1tb7SOb1HjD4dLMW6GoY8ZW2HSioGzNwCRjH7Hq8cm12hUcY+PyCXGIXixeEOiebVaQjijE0eXJXIgEE5u171f71jo9/+sDLzLe9uGSb6VTe87A76gS13y9BjF0ngrUaHnYIuniblS4y9FTEjo32RlkR9OKIry48gqAuC46vL5OggKJjcMdnHf5RcBve5jD5evBnlDZLTi5YTeS4mCIBYgx7nt1PXqNN0+/XbOXwJ3/g2NuDRIDIWZAWtlMsbQkxB/6LLeIFMFp9LkMHNX3Udnn7eNladGjLV0ZiikIvMuYgnlOKUfu41pn2moRsvXzRKncoys1O/dAUV3I/OVtnOiBMX+XGtzilJpvW41xUVbpZBXKRNMlyXnWw8D4=
   app: etho-boost
   run: pipenv shell
   run: python manage.py db stamp head
   run: python manage.py db migrate
   run: python manage.py db upgrade
-  on:
-    repo: Eth-Crowdfund/eth_crowdfund_be
   skip_cleanup: 'true'
