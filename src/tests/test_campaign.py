@@ -22,7 +22,6 @@ class CampaignTest(unittest.TestCase):
         "name": "camp",
         "description": "desc1",
         "image": "image.edu",
-        "contributors": 1,
         "upvote": 2,
         "manager": "3",
         "address": "4",
@@ -32,7 +31,6 @@ class CampaignTest(unittest.TestCase):
         "name": "Eth",
         "description": "desc2",
         "image": "image.com",
-        "contributors": 100,
         "upvote": 222,
         "manager": "13",
         "address": "14",
@@ -55,7 +53,6 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(self.campaign1["name"], json_data["name"])
     self.assertEqual(self.campaign1["description"], json_data["description"])
     self.assertEqual(self.campaign1["image"], json_data["image"])
-    self.assertEqual(self.campaign1["contributors"], json_data["contributors"])
     self.assertEqual(self.campaign1["upvote"], json_data["upvote"])
     self.assertEqual(self.campaign1["manager"], json_data["manager"])
     self.assertEqual(self.campaign1["address"], json_data["address"])
@@ -67,7 +64,6 @@ class CampaignTest(unittest.TestCase):
   def test_campaign_update(self):
     campaign1_update = {
       "description": "new description",
-      "contributors": 5,
       "manager": "1x3y",
       "value": 213.79
     }
@@ -86,8 +82,6 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(self.campaign1["name"], json_data["name"])
     self.assertNotEqual(self.campaign1["description"], json_data["description"])
     self.assertEqual(campaign1_update["description"], json_data["description"])
-    self.assertNotEqual(self.campaign1["contributors"], json_data["contributors"])
-    self.assertEqual(campaign1_update["contributors"], json_data["contributors"])
     self.assertNotEqual(self.campaign1["manager"], json_data["manager"])
     self.assertEqual(campaign1_update["manager"], json_data["manager"])
     self.assertEqual(213.79, json_data["value"])
@@ -172,7 +166,6 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(self.campaign2["name"], json_data[0]["name"])
     self.assertEqual(self.campaign2["description"], json_data[0]["description"])
     self.assertEqual(self.campaign2["image"], json_data[0]["image"])
-    self.assertEqual(self.campaign2["contributors"], json_data[0]["contributors"])
     self.assertEqual(self.campaign2["upvote"], json_data[0]["upvote"])
     self.assertEqual(self.campaign2["manager"], json_data[0]["manager"])
     self.assertEqual(self.campaign2["address"], json_data[0]["address"])
