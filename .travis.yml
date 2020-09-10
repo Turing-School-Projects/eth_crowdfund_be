@@ -7,11 +7,6 @@ addons:
     packages: 
       - postgresql-12
       - postgresql-client
-env: 
-  - SQLALCHEMY_TEST_DATABASE_URI=postgresql://postgres:@localhost/eth_crowdfund_api_db_test
-  global:
-    - PGVER=12 
-    - PGPORT=5433
 services:
   - postgresql
 install:
