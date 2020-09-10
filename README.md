@@ -35,7 +35,7 @@
  to set the system environment variables.
  You should now be able to run the app:  
  9. Run
- ``` 
+ ```
  $ python3 run.py
  =>  * Serving Flask app "src.app" (lazy loading)
      * Environment: development
@@ -82,7 +82,7 @@ Path: `eth_crowdfund_be/eth_crowdfund_api`
  ```
  and you should see `campaigns` and `requests` tables listed.
  1. To exit the database, `$ exit`
- 
+
  ### Seeding the Database
  Within the `pipenv shell` virtual environment, do the following:
  1. Ensure you have the Click package installed by running `$ pipenv install Click`
@@ -396,7 +396,96 @@ To make updates to the database and run a new migration, do the following:
 * No body required
 * Example response
 ```
-{ 
+{
     "USD": 357
 }
+```
+#### Add a Contributor to a Campaign
+* Path: `POST http://localhost:3000/api/v1/campaigns/<campaign_address>/contributor/<contributor_address>`
+* No body required
+* Example response body
+```
+{
+    "address": "Hf84jhGE9fdjF9ehfdse45",
+    "created_at": "2020-09-06T18:41:57.156262",
+    "description": "Need help serving community",
+    "expiration": "2020-10-25T00:00:00",
+    "id": 16,
+    "image": "https://picsum.photos/200/300",
+    "manager": "LJHhf82u3hr0d9uhUg4g",
+    "min_contribution": 1.5,
+    "name": "Market St. Soup Kitchen",
+    "requests": [
+        {
+            "approvals": 0,
+            "approved": false,
+            "campaign_id": 16,
+            "created_at": "2020-09-06T18:41:57.238755",
+            "description": "Cleaning supplies",
+            "eth_id": null,
+            "finalized": false,
+            "id": 15,
+            "image": "https://picsum.photos/200/300",
+            "recipient": "jhF97hdfha97",
+            "updated_at": "2020-09-06T18:41:57.238757",
+            "value": 25.0
+        }
+    ],
+    "updated_at": "2020-09-06T18:41:57.156266",
+    "upvote": 50,
+    "value": null
+}
+```
+#### View Campaigns by Contributor Address
+* Path: `GET http://localhost:3000/api/v1/contributor/<contributor_address>/campaigns`
+* No body required
+* Example response body
+```
+[
+    {
+        "address": "Hf84jhGE9fdjF9ehfdse45",
+        "created_at": "2020-09-06T18:41:57.156262",
+        "description": "Need help serving community",
+        "expiration": "2020-10-25T00:00:00",
+        "id": 16,
+        "image": "https://picsum.photos/200/300",
+        "manager": "LJHhf82u3hr0d9uhUg4g",
+        "min_contribution": 1.5,
+        "name": "Market St. Soup Kitchen",
+        "requests": [
+            {
+                "approvals": 0,
+                "approved": false,
+                "campaign_id": 16,
+                "created_at": "2020-09-06T18:41:57.238755",
+                "description": "Cleaning supplies",
+                "eth_id": null,
+                "finalized": false,
+                "id": 15,
+                "image": "https://picsum.photos/200/300",
+                "recipient": "jhF97hdfha97",
+                "updated_at": "2020-09-06T18:41:57.238757",
+                "value": 25.0
+            }
+        ],
+        "updated_at": "2020-09-06T18:41:57.156266",
+        "upvote": 50,
+        "value": null
+    },
+    {
+        "address": "DFjh489GD74hgls8",
+        "created_at": "2020-09-06T18:41:57.156312",
+        "description": "Serving communities hit hard by Covid19",
+        "expiration": "2020-10-25T00:00:00",
+        "id": 17,
+        "image": "https://picsum.photos/200/300",
+        "manager": "jhF8dfh4jjgfdkjs45",
+        "min_contribution": 1.5,
+        "name": "Arc Thrift",
+        "requests": [],
+        "updated_at": "2020-09-06T18:41:57.156322",
+        "upvote": 50,
+        "value": null
+    }
+]
 ```
