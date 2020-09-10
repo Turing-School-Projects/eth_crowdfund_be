@@ -1,19 +1,20 @@
 language: python
 python:
-  - "3.8"
+- '3.8'
 services:
-  - postgresql
+- postgresql
 install:
-  - pip install pipenv
-  - pipenv install
-before_script: 
-  - psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
+- pip install pipenv
+- pipenv install
+before_script:
+- psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
 script:
-  - pytest
+- pytest
 deploy:
   provider: heroku
   api_key:
-    secure: FXyiqE3KUUtbGTOQDEBoQrY3dL4PCv1zNSYkv5KFCoKxUJOWwYfqrIPwPoFeAGliu4LxJImBnEvWEehfAFep2H/+A0fGewtTpKX7GJtl9h+rIOGfq/ipX4KeFR4LIrC8g14ebfdxls29l3dg5bLuWEJCTI4ZaFfZZmNI/6mjs3VNOZHCoOnzURZH1dgTGfRWT4pwuZZ9gh477CcG5iKuoGoXKSXXfke+XaZ1Fa4Xl5aiqRyJdHrJMh1qgt/HvjAXfWTZdqI5oh+St85irjiOqM6H2wtMqFNoqlaSBS+jYZpN7r6Byj/nMElmP35JQ97jdBVYSjD4hu4V+1G5XctpgAhIryKV4/w3bwhaAM4axLx58cDh1p/M/bYMV/sx4bEWiYgQ79tdHf9Yiyx/pCWeOLuDd6Q5u/ZHIardrhyayqchoS/wkr5DxRo1v40dWjGHs6AFOSO8eALq4iqbXPU1U6ZpL9Gw5t2D7FSdG4jaEhdyI7kU1NVTgXR8aRtKaBqbI3u0C4qW2eE9OcLP7MWyQebASFA2/RZA6YB8NvLHlZiR89hWf+B75gyDYwVuvcet6zCRncxv0FoW6uqod2je0Aa0ZijZvV2FHK2lTE09ULhAQwWA9VkjYfcPJtZAKpLJHtsYGlQDzETAMLT9jLZYQQYqkpmPYe6y8gJJHy2lJ30=
+    secure: bSrVTY2bsARzk33CjRZpfeUY5dIG19h0UkG+93qpADOCXSnLcsx8HpXPcU4M4NVhIetxDzASfImeuJqX2NAqqOaopxzh9UQ4rdktcALz4q2/58q5QFB5qLznMPb8UpkDZJ1pGpLldwNlOStMasJ9UAMfRycHEkeCuL37BBUSMtios+OyKrnsvw1HRK2xME9VGDPYvl8n7e455nsS7jeuK1QZgmKhcG/IMwjGWDA7mm1BDDwkGGKmecKPyReRTKryTmWuBRPj2x903TJSo3IwOKBLZSWOOdqF2FFQDn7b/83bJ/9Sf4G5hM9CLHjTb16UZOApSv8D3fhA7Pvo51lpaQDrUKWA6TRHuVp1i0QQYslMxIoWOnvPw3MAEmp8dliXvU+iiBPmUatGBwhC+hgM7E604ZM9j3zm3+6GHMyo4CtYwOwXNYwCXMRHksyL6sydHPwTMjRjXo73/05xoL8HlBcYtBnlfC/GStM8/y60Sh25kzW7V3VEHAKpsFMblNlUEaZSzW5OVqwOS0v0lnV4REkWmCYnMEsv2l3SxnLKwhTZUqYDcU7nenaQ8VmOWOmCX4PYqtubruTyRUW7MC+t6LCLLo7JXkOhZt7/EnhWSBxBduDK+kC7vmzcITxFLVGDBwb/MKeM7zoTOLFsvxosMrN5r90G5J5SdUlUYJYO1QU=
   app: etho-boost
   on:
     repo: Eth-Crowdfund/eth_crowdfund_be
+  skip_cleanup: 'true'
