@@ -63,7 +63,7 @@ def add_seeds(seed):
         'image': 'https://picsum.photos/200/300',
         'value': 100, 
         'recipient': 'kfh7DFh38H',
-        'approvals': 0, 
+        'approvals': 0,
         
     }
 
@@ -73,7 +73,7 @@ def add_seeds(seed):
         'image': 'https://picsum.photos/200/300',
         'value': 250, 
         'recipient': 'JHh7734utg8ds7H',
-        'approvals': 0, 
+        'approvals': 0,
         
     }
 
@@ -101,6 +101,9 @@ def add_seeds(seed):
     request1['campaign_id'] = campaign_ids[0]
     request2['campaign_id'] = campaign_ids[0]
     request3['campaign_id'] = campaign_ids[1]
+    request1['eth_id'] = 0
+    request2['eth_id'] = 1
+    request3['eth_id'] = 0
     request_list = [Request(request1), Request(request2), Request(request3)]
 
     db.session.add_all(request_list)
