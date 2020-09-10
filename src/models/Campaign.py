@@ -61,6 +61,10 @@ class Campaign(db.Model):
     return Campaign.query.get(id)
 
   @staticmethod
+  def get_campaign_by_address(address):
+      return Campaign.query.filter_by(address=address)
+
+  @staticmethod
   def get_campaign_by_name(name):
     return Campaign.query.filter_by(name=name).first()
 
