@@ -9,7 +9,7 @@ install:
   - pip install pipenv
   - pipenv install
 before_script: 
-  - psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;'
+  - psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
 script:
   - pytest
 deploy:
