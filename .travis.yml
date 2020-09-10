@@ -9,9 +9,6 @@ install:
 before_script:
 - psql -c 'CREATE DATABASE eth_crowdfund_api_db_test;' -U postgres
 script:
-- python manage.py db stamp head 
-- python manage.py db migrate
-- python manage.py db upgrade
 - pytest
 deploy:
   provider: heroku
