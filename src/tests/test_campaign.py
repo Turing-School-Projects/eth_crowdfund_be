@@ -178,3 +178,23 @@ class CampaignTest(unittest.TestCase):
     self.assertEqual(res_index.status_code, 404)
     json_data = json.loads(res_index.data)
     self.assertEqual("The entered manager has no campaigns", json_data["error"])
+
+  def test_add_contributor(self):
+    create_campaign = self.client().post('/api/v1/campaigns/',
+                             headers={'Content-Type': 'application/json'},
+                             data=json.dumps(self.campaign1))
+    self.assertEqual(create_campaign.status_code, 201)
+
+    contributor = {
+        "address": "XyZpekdA",
+        "email": "test@email.com"
+    }
+    create_contributor = self.client().post('/api/v1/contributor/',
+                             headers={'Content-Type': 'application/json'},
+                             data=json.dumps(contributor))
+    self.assertEqual(create_contributor.status_code, 201)
+
+    add_contributor = self.client().post('/api/v1/campaigns/4/contributor/XyZpekdA',
+                             headers={'Content-Type': 'application/json'},
+                             )
+    self.assertEqual(add_contributor.status_code, 201)
