@@ -24,7 +24,6 @@ class RequestTest(unittest.TestCase):
         'description': 'A small town in South Africa needs a well for clean water',
         'image': 'https://picsum.photos/200/300',
         'manager': 'X5JT498FJeklnsd8382hf',
-        'contributors': 25,
         'upvote': 50,
         'min_contribution': 1.5,
         'address': 'FjSDh482hfjGE77dk',
@@ -35,7 +34,6 @@ class RequestTest(unittest.TestCase):
         'description': 'Need help serving community',
         'image': 'https://picsum.photos/200/300',
         'manager': 'LJHhf82u3hr0d9uhUg4g',
-        'contributors': 25,
         'upvote': 50,
         'min_contribution': 1.5,
         'address': 'Hf84jhGE9fdjF9ehfdse45',
@@ -90,7 +88,7 @@ class RequestTest(unittest.TestCase):
     json_data = json.loads(res.data)
     self.assertEqual(len(json_data), 2)
 
-  
+
   def test_request_creation(self):
     self.request1['campaign_id'] = self.campaign1_id
     res = self.client().post('/api/v1/requests/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
@@ -103,7 +101,7 @@ class RequestTest(unittest.TestCase):
     self.assertEqual(self.request1["value"], json_data["value"])
     self.assertEqual(self.request1["recipient"], json_data["recipient"])
     self.assertEqual(self.request1["approvals"], json_data["approvals"])
-  
+
   def test_request_update(self):
     self.request1['campaign_id'] = self.campaign1_id
     res = self.client().post('/api/v1/requests/', headers={'Content-Type': 'application/json'}, data=json.dumps(self.request1))
@@ -172,7 +170,7 @@ class RequestTest(unittest.TestCase):
 
     self.assertEqual(self.request1["value"], json_data1["value"])
     self.assertNotEqual(self.request2["value"], json_data1["value"])
-    
+
     self.assertEqual(self.request2["value"], json_data2["value"])
     self.assertNotEqual(self.request1["value"], json_data2["value"])
 
