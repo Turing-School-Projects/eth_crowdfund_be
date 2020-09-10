@@ -51,7 +51,7 @@ class ContributorTest(unittest.TestCase):
                              headers={'Content-Type': 'application/json'},
                              data=json.dumps(self.contributor2))
     self.assertEqual(response.status_code, 201)
-    
+
     contributor2_id = json.loads(response.data)["id"]
     updated_response = self.client().put('/api/v1/contributor/{}'.format(contributor2_id),
                             headers={'Content-Type': 'application/json'},

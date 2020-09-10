@@ -1,5 +1,6 @@
 from flask import request, json, Response, Blueprint, jsonify
 from ..models.Campaign import Campaign, CampaignSchema
+from ..models.Contributor import Contributor, ContributorSchema
 from marshmallow import ValidationError
 from sqlalchemy import exc
 from . import custom_response
@@ -87,3 +88,19 @@ def get_campaigns_by_manager(manager):
     return custom_response({'error': 'The entered manager has no campaigns'}, 404)
   else:
     return custom_response(campaign_data, 200)
+
+@campaign_api.route('/<campaign_address>/contributor/<contributor_address>', methods=['POST'])
+def add_contributor_to_campaign(campaign_address, contributor_address):
+  try:
+    campaign = Campaign.get_campaign_by_address(campaign_address).first()
+    contributor = Contributor.get_contributor_by_address(contributor_address).first()
+    campaign.contributors.append(contributor)
+  except ValidationError as err:
+    return custom_response(err.messages, 400)
+  except exc.IntegrityError as err:
+    return custom_response({ "error": err.orig.diag.message_detail}, 400)
+  except:
+    return custom_response({ "error": "The entered campaign address and/or contributor address are incorrect" }, 400)
+
+  campaign_data = campaign_schema.dump(campaign)
+  return custom_response(campaign_data, 201)
