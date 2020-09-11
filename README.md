@@ -1,41 +1,52 @@
-# Etherium Crowdfund
+# Etho Boost - A crowdfund app built on Etherium
+- [Setup](#setup)
+- [Database Setup](#database-setup)
+- [Seeding The Database](#seeding-the-database)
+- [Updating The Database](#database-updates)
+- [API Endpoings](#api-endpoints)
 
-## Setup
+## Setup <a name="setup"></a>
+<details>
+  <summary> App Setup Instructions </summary>
 
-1. Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine, if you do not have them already
+ 1. Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine, if you do not have them already
   * To install Pipenv on a Mac, you can run `$ brew install pipenv`
-2. You should have Python 3.8.5
+ 2. You should have Python 3.8.5
   ```
   $ python3 --version
   => Python 3.8.5
   ```
-3. You should have Postgres
+ 3. You should have Postgres
   ```
   $ which psql
   => /Applications/Postgres.app/Contents/Versions/latest/bin/psql
   ```
-4. You should have pipenv
+ 4. You should have pipenv
   ```
   $ pipenv --version
   => pipenv, version 2020.8.13
   ```
-5. Fork and clone down the repository
-6. Change into the directory `$ cd eth_crowdfund_be/eth_crowdfund_api`
-7. You will need to work in a virtual environment. Why? Using a virtual environment for Python projects allows us to have an isolated working copy of Python so we can work on a specific project without worrying about affecting other projects.
-8. Within the `/eth_crowdfund_api` directory:  
- a. Run `# pipenv --three` to create the virtual environment  
- b. Run `$ pipenv shell` to activate the project virtual environment. When you are done working on the project, you should execute `$ exit` to exit the virtual environment  
- c. Run `$ pipenv install flask flask-sqlalchemy psycopg2 flask-migrate flask-script marshmallow flask-bcrypt pyjwt` to install all dependencies  
- d. Run `$ createdb eth_crowdfund_api_db` to create the app database  
- e. Run
- ```
- $ export FLASK_ENV=development  
- $ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
- ```
- to set the system environment variables.
- You should now be able to run the app:  
- 9. Run
- ```
+
+ 5. Fork and clone down the repository
+ 6. Change into the directory `$ cd eth_crowdfund_be`
+ 7. You will need to work in a virtual environment. Why? Using a virtual environment for Python projects allows us to have an isolated working copy of Python so we can work on a specific project without worrying about affecting other projects.
+ 8. Within the root directory:  
+  a. Run `# pipenv --three` to create the virtual environment  
+  c. Run `$ pipenv install` to install all dependencies  
+  d. Run `$ createdb eth_crowdfund_api_db` to create the app database  
+  e. Run `$ createdb eth_crowdfund_api_db_test` to create the testing database  
+  f. Run `$ touch .env` to create an enviornment file 
+  e. Within the `.env` file add appropriate environment values for flask enviornment, database URLs, and localhost port
+  ```
+   FLASK_ENV=development
+   SQLALCHEMY_DATABASE_URI="postgresql://postgres:password@localhost/eth_crowdfund_api_db"
+   SQLALCHEMY_TEST_DATABASE_URI="postgresql://postgres:password@localhost/eth_crowdfund_api_db_test"
+   PORT=3000
+  ```
+
+ 9. Run the following to activate the project virtual environment. When you are done working on the project, you should execute `$ exit` to exit the virtual environment
+ ``` 
+ $ pipenv shell   
  $ python3 run.py
  =>  * Serving Flask app "src.app" (lazy loading)
      * Environment: development
@@ -49,18 +60,21 @@
   ```
  10. In your browser, navigate to http://localhost:3000/ and you should see `Etherium for life`  
  11. To stop the server, `ctrl + c`
+</details>
 
-### Database Setup
-Path: `eth_crowdfund_be/eth_crowdfund_api`
+### Database Setup <a name="database-setup"></a>
+<details>
+  <summary> Database Setup Instructions </summary>
+Path: `eth_crowdfund_be`
 
- 1. Delete the `/migrations` directory
  1. Run
  ```
+ $ python3 manage.py db stamp head
  $ python3 manage.py db init
  $ python3 manage.py db migrate
  $ python3 manage.py db upgrade
  ```
- 1. You can check the database by running
+ 2. You can check the database by running
  ```
  $ psql
  $ \c eth_crowdfund_api_db
@@ -74,39 +88,48 @@ Path: `eth_crowdfund_be/eth_crowdfund_api`
 
  $ SELECT * FROM campaigns;
  => id | name | description | image | manager | contributors | upvote | min_contribution | address | expiration | created_at | updated_at
-    ----+------+-------------+-------+---------+--------------+--------+------------------+---------+------------+------------+------------
+   ----+------+-------------+-------+---------+--------------+--------+------------------+---------+------------+------------+------------
 
  $ SELECT * FROM requests;
  => id | campaign_id | description | image | value | recipient | approved | finalized | approvals | created_at | updated_at
-    ----+-------------+-------------+-------+-------+-----------+----------+-----------+-----------+------------+------------
+   ----+-------------+-------------+-------+-------+-----------+----------+-----------+-----------+------------+------------
  ```
- and you should see `campaigns` and `requests` tables listed.
- 1. To exit the database, `$ exit`
+ 3. To exit the database, `$ exit`
+ </details>
+ 
+ ### Seeding the Database <a name="seeding-the-database"></a>
+ <details>
+  <summary> Database Seeding Instructions </summary>
+ Within the `pipenv shell` virtual environment, run the following:
 
- ### Seeding the Database
- Within the `pipenv shell` virtual environment, do the following:
  1. Ensure you have the Click package installed by running `$ pipenv install Click`
- 2. Ensure you are at `/eth_crowdfund_be/eth_crowdfund_api`
+ 2. Ensure you are at `/eth_crowdfund_be`
  3. Run `$ python3 run.py --seed=True`
  4. Execute `$ Ctrl + C` to shut down the server and then restart the server with `$ python3 run.py`
  5. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
+</details>
 
-### Database Updates
-Path: `eth_crowdfund_be/eth_crowdfund_api`  
-To make updates to the database and run a new migration, do the following:
+### Database Updates <a name="database-updates"></a>
+<details>
+  <summary> Updating the Database Instructions </summary>
 
-1. `$ python3 manage.py db downgrade`
-1. You should delete the migration if you are making a change.
-1. `$ python3 manage.py db migrate`
-1. `$ python3 manage.py db upgrade`
-
+Path: `/eth_crowdfund_be`  
+To make updates to the database and run a new migration, run the following:
+```
+ $ python3 manage.py db stamp head
+ $ python3 manage.py db init
+ $ python3 manage.py db migrate
+ $ python3 manage.py db upgrade
+```
 * Note: If you encounter any root errors, such as `ERROR [root] Error: Target database is not up to date.` or `ERROR [root] Error: Relative revision -1 didn't produce 1 migrations`, run `$ python3 manage.py db stamp head` to reset the target database to your current database head.
+</details>
 
-## API Endpoints
+## API Endpoints <a name="api-endpoints"></a>
 
 ### Campaigns
 
-#### Create a campaign
+<details>
+  <summary>Create a campaign </summary>
 
 * Path: `POST http://localhost:3000/api/v1/campaigns/`
 * Example JSON post body:
@@ -140,7 +163,11 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 2
 }
 ```
-#### Get a Campaign by ID number
+</details>
+
+<details>
+  <summary> Get a Campaign by ID number </summary>
+
 * Path: `GET http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
 * No body required
 * Example response body
@@ -161,7 +188,12 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 2
 }
 ```
-#### Get all Campaigns
+</details>
+
+
+<details>
+  <summary> Get all Campaigns </summary>
+
 * Path: `GET http://localhost:3000/api/v1/campaigns`
 * No body required
 * Example response body
@@ -213,7 +245,11 @@ To make updates to the database and run a new migration, do the following:
     }
 ]
 ```
-#### Update a Campaign by ID number
+</details>
+
+<details>
+  <summary> Update a Campaign by ID number </summary>
+
 * Path: `PUT http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
 * Example JSON put body
 ```
@@ -241,7 +277,11 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 4
 }
 ```
-#### Delete a Campaign by ID number
+</details>
+
+<details>
+  <summary> Delete a Campaign by ID number </summary>
+
 * Path: `DELETE http://localhost:3000/api/v1/campaigns/<insert campaign id here>`
 * No body required
 * Example response body
@@ -262,8 +302,13 @@ To make updates to the database and run a new migration, do the following:
     "upvote": 4
 }
 ```
+</details>
+
 ### Requests
-#### Create a Request
+
+<details>
+  <summary> Create a Request </summary>
+
 * Path `POST http://localhost:3000/api/v1/requests/`
 * Example JSON post body. `campaign_id`, `value`, and `recipient` are required.
 ```
@@ -291,7 +336,11 @@ To make updates to the database and run a new migration, do the following:
     "value": 1.0
 }
 ```
-#### Get a Request by ID number
+</details>
+
+<details>
+  <summary> Get a Request by ID number </summary>
+
 * Path: `GET http://localhost:3000/api/v1/requests/<insert request id here>`
 * No body required
 * Example response body
@@ -310,7 +359,11 @@ To make updates to the database and run a new migration, do the following:
     "value": 1.0
 }
 ```
-#### Get all Requests
+</details>
+
+<details>
+  <summary> Get all Requests </summary>
+
 * Path `GET http://localhost:3000/api/v1/requests`
 * No body required
 * Example response body
@@ -344,7 +397,11 @@ To make updates to the database and run a new migration, do the following:
     }
 ]
 ```
-#### Update a Request by ID number
+</details>
+
+<details>
+  <summary> Update a Request by ID number </summary>
+
 * Path: `PUT http://localhost:3000/api/v1/requests/<insert request id here>`
 * Example JSON put body
 ```
@@ -370,7 +427,11 @@ To make updates to the database and run a new migration, do the following:
     "value": 1.0
 }
 ```
-#### Delete a Request by ID number
+</details>
+
+<details>
+  <summary> Delete a Request by ID number </summary>
+
 * Path: `DELETE http://localhost:3000/api/v1/requests/<insert request id here>`
 * No body required
 * Example response body
@@ -389,8 +450,11 @@ To make updates to the database and run a new migration, do the following:
     "value": 2.0
 }
 ```
+</details>
 
-#### Convert Wei to USD
+<details>
+  <summary> Convert Wei to USD </summary>
+  
 * Path: `GET http://localhost:3000/api/v1/price_converter?wei={wei_amount}`
 * Requires query params with a key of 'wei' and value of the amount of wei to be converter
 * No body required
@@ -400,7 +464,11 @@ To make updates to the database and run a new migration, do the following:
     "USD": 357
 }
 ```
-#### Add a Contributor to a Campaign
+</details>
+
+<details>
+  <summary> Add a Contributor to a Campaign </summary>
+
 * Path: `POST http://localhost:3000/api/v1/campaigns/<campaign_address>/contributor/<contributor_address>`
 * No body required
 * Example response body
@@ -436,7 +504,11 @@ To make updates to the database and run a new migration, do the following:
     "value": null
 }
 ```
-#### View Campaigns by Contributor Address
+</details>
+
+<details>
+  <summary> View Campaigns by Contributor Address </summary>
+
 * Path: `GET http://localhost:3000/api/v1/contributor/<contributor_address>/campaigns`
 * No body required
 * Example response body
@@ -489,3 +561,4 @@ To make updates to the database and run a new migration, do the following:
     }
 ]
 ```
+</details>
