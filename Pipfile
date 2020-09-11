@@ -19,6 +19,8 @@ python-dotenv = "*"
 sqlalchemy = "*"
 flask-cors = "*"
 requests = "*"
+flask-mail = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.8"

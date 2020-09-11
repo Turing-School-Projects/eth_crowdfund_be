@@ -22,18 +22,14 @@ def create_app(env_name):
   app.config.from_object(app_config[env_name])
 
   db.init_app(app)
-  # db.create_tables()
-
   app.register_blueprint(campaign_blueprint, url_prefix='/api/v1/campaigns')
   app.register_blueprint(request_blueprint, url_prefix='/api/v1/requests')
   app.register_blueprint(price_converter_blueprint, url_prefix='/api/v1/price_converter')
   app.register_blueprint(contributor_blueprint, url_prefix='/api/v1/contributor')
 
-
   @app.route('/', methods=['GET'])
   def index():
     return 'Etherium for life'
-
 
 
   return app
