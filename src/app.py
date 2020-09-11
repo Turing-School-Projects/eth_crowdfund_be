@@ -1,6 +1,7 @@
 from flask import Flask
 from dotenv import load_dotenv # importing dotenv
 load_dotenv(override=True) # loading the environment variables at app startup and overriding any existing system variables
+from flask_mail import Mail
 
 from .config import app_config
 from .models import db
@@ -16,19 +17,17 @@ def create_app(env_name):
   # app initiliazation
   app = Flask(__name__)
 
+  mail = Mail(app)
+  db.init_app(app)
   cors = CORS(app)
   app.config['CORS_HEADERS'] = 'Content-Type'
 
   app.config.from_object(app_config[env_name])
 
-  db.init_app(app)
-  # db.create_tables()
-
   app.register_blueprint(campaign_blueprint, url_prefix='/api/v1/campaigns')
   app.register_blueprint(request_blueprint, url_prefix='/api/v1/requests')
   app.register_blueprint(price_converter_blueprint, url_prefix='/api/v1/price_converter')
   app.register_blueprint(contributor_blueprint, url_prefix='/api/v1/contributor')
-
 
   @app.route('/', methods=['GET'])
   def index():
@@ -37,6 +36,5 @@ def create_app(env_name):
   @app.route('/snow', methods=['GET'])
   def snow():
     return 'snow day!'
-
 
   return app

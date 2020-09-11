@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0984312a2208970b498f036b499735e1fd36ac3eff4102e6a7eca54657ee21be"
+            "sha256": "a1f42a1dcb839d751eedd63384524b04680013a2b656028b6562ee746247885e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -35,6 +35,12 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.2.0"
+        },
+        "blinker": {
+            "hashes": [
+                "sha256:471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
+            ],
+            "version": "==1.4"
         },
         "certifi": {
             "hashes": [
@@ -113,6 +119,13 @@
             ],
             "index": "pypi",
             "version": "==3.0.9"
+        },
+        "flask-mail": {
+            "hashes": [
+                "sha256:22e5eb9a940bf407bcf30410ecc3708f3c56cc44b29c34e1726fe85006935f41"
+            ],
+            "index": "pypi",
+            "version": "==0.9.1"
         },
         "flask-migrate": {
             "hashes": [
@@ -285,6 +298,13 @@
             ],
             "version": "==1.0.4"
         },
+        "python-http-client": {
+            "hashes": [
+                "sha256:f5cb0d407b30ed699c2f7ac4ba2ba8a1f2352d44bd9db6ea3bab98d081b433ce"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==3.3.1"
+        },
         "requests": {
             "hashes": [
                 "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b",
@@ -292,6 +312,14 @@
             ],
             "index": "pypi",
             "version": "==2.24.0"
+        },
+        "sendgrid": {
+            "hashes": [
+                "sha256:145436de333ad4c38ea4b697db820de6e1ba70bf3a4aecc88818758438e25fcb",
+                "sha256:904dbfe2e0da2bf07f51202af837cac029b160a829e041e1972da2489a928d3b"
+            ],
+            "index": "pypi",
+            "version": "==6.4.6"
         },
         "six": {
             "hashes": [
@@ -338,6 +366,12 @@
             ],
             "index": "pypi",
             "version": "==1.3.19"
+        },
+        "starkbank-ecdsa": {
+            "hashes": [
+                "sha256:423f81bb55c896a3c85ee98ac7da98826721eaee918f5c0c1dfff99e1972da0c"
+            ],
+            "version": "==1.1.0"
         },
         "urllib3": {
             "hashes": [
