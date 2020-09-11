@@ -102,11 +102,10 @@ Path: `eth_crowdfund_be`
   <summary> Database Seeding Instructions </summary>
  Within the `pipenv shell` virtual environment, run the following:
 
- 1. Ensure you have the Click package installed by running `$ pipenv install Click`
- 2. Ensure you are at `/eth_crowdfund_be`
- 3. Run `$ python3 run.py --seed=True`
- 4. Execute `$ Ctrl + C` to shut down the server and then restart the server with `$ python3 run.py`
- 5. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
+ 1. Ensure you are at `/eth_crowdfund_be`
+ 2. Run `$ python3 manage.py seed`
+ 3. Start server with `$ python3 run.py`
+ 4. Visit `localhost:3000/api/v1/campaigns` and `localhost:3000/api/v1/requests` and you should see seeded Campaigns and Requests.
 </details>
 
 ### Database Updates <a name="database-updates"></a>
