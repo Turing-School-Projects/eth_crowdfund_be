@@ -34,9 +34,6 @@ def create_app(env_name):
   def index():
     return 'Etherium for life'
 
-  @app.route('/snow', methods=['GET'])
-  def snow():
-    return 'snow day!'
 
 
   return app

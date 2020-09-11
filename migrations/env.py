@@ -3,12 +3,11 @@ from __future__ import with_statement
 import logging
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config, create_engine
+from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
 
-import os
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -33,9 +32,6 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-def get_url():
-  db = os.getenv('SQLALCHEMY_DATABASE_URI')
-  return db
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -76,14 +72,11 @@ def run_migrations_online():
                 directives[:] = []
                 logger.info('No changes in schema detected.')
 
-    # connectable = engine_from_config(
-    #     config.get_section(config.config_ini_section),
-    #     prefix='sqlalchemy.',
-    #     poolclass=pool.NullPool,
-    # )
-
-    connectable = create_engine(get_url())
-
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section),
+        prefix='sqlalchemy.',
+        poolclass=pool.NullPool,
+    )
 
     with connectable.connect() as connection:
         context.configure(
