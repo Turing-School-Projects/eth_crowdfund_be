@@ -25,8 +25,10 @@ def create():
 
   request_info = Request(data)
   request_info.save()
-  # Sends emails. Needs to be updated to use contributor emails for this request's campaign
-  request_notification(['potoj73985@oramail.net'], 'Test Link')
+
+  # Finds/sends emails. Needs update to use link for the request page. 
+  emails = [contributor.email for contributor in campaign.contributors]
+  request_notification(emails, 'Test Link')
 
   request_data = request_schema.dump(request_info)
   return custom_response(request_data, 201)

@@ -7,13 +7,10 @@ def request_notification(emails, request_link):
         from_email = 'ethoboost@gmail.com',
         to_emails=emails, 
         subject='Ethoboost Campaign Request',
-        html_content=f'there is a new request: {request_link}'
+        html_content=f'There is a new request that requires your vote: {request_link}'
     )
     try: 
         sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
-        response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        sg.send(message)
     except Exception as e: 
         print(e.message)
