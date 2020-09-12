@@ -26,7 +26,6 @@ def upgrade():
     sa.Column('manager', sa.String(), nullable=False),
     sa.Column('upvote', sa.Integer(), nullable=True),
     sa.Column('min_contribution', sa.Float(), nullable=False),
-    sa.Column('value', sa.Float(), nullable=True),
     sa.Column('address', sa.String(), nullable=False),
     sa.Column('expiration', sa.DateTime(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
