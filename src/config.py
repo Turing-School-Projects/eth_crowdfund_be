@@ -10,6 +10,7 @@ class Development(object):
   MAIL_USERNAME = 'apikey'
   MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
   MAIL_DEFAULT_SENDER = "etho@ethoboost.com"
+  REDIS_URL = os.getenv('REDIS_URL') or 'redis://'
 
 class Production(object):
   DEBUG = True
@@ -22,12 +23,13 @@ class Production(object):
   MAIL_USERNAME = 'apikey'
   MAIL_PASSWORD = os.getenv('SENDGRID_API_KEY')
   MAIL_DEFAULT_SENDER = "etho@ethoboost.com"
+  REDIS_URL = os.getenv('REDIS_URL') or 'redis://'
 
 class Testing(object):
   TESTING = True
   SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_TEST_DATABASE_URI')
   SQLALCHEMY_TRACK_MODIFICATIONS=False
-
+  REDIS_URL = os.getenv('REDIS_URL') or 'redis://'
 
 app_config = {
     'development': Development,

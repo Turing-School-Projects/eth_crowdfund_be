@@ -1,6 +1,8 @@
 from flask import Flask
 from dotenv import load_dotenv # importing dotenv
 load_dotenv(override=True) # loading the environment variables at app startup and overriding any existing system variables
+from redis import Redis
+import rq 
 
 from .config import app_config
 from .models import db
@@ -26,6 +28,10 @@ def create_app(env_name):
   app.register_blueprint(request_blueprint, url_prefix='/api/v1/requests')
   app.register_blueprint(price_converter_blueprint, url_prefix='/api/v1/price_converter')
   app.register_blueprint(contributor_blueprint, url_prefix='/api/v1/contributor')
+
+  # Background Worker Setup 
+  app.redis = Redis.from_url(app.config['REDIS_URL'])
+  app.task_queue = rq.Queue('ethoboost-tasks', connection=app.redis)
 
   @app.route('/', methods=['GET'])
   def index():

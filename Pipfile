@@ -21,6 +21,7 @@ flask-cors = "*"
 requests = "*"
 flask-mail = "*"
 sendgrid = "*"
+rq = "*"
 
 [requires]
 python_version = "3.8"
