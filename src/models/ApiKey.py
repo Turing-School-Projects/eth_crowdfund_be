@@ -1,10 +1,9 @@
 from marshmallow import fields, Schema
 from . import db
-from .ApiKey import ApiKeySchema
+# from .ApiKey import ApiKeySchema
 
 
 class ApiKey(db.Model):
-
   # table name
   __tablename__ = 'api_keys'
   id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +14,8 @@ class ApiKey(db.Model):
   # class constructor
   def __init__(self, data):
     self.key = data.get('key')
+    self.created_at = datetime.datetime.utcnow()
+    self.updated_at = datetime.datetime.utcnow()
 
   def save(self):
     db.session.add(self)

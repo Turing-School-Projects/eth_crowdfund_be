@@ -69,6 +69,14 @@ def upgrade():
     sa.ForeignKeyConstraint(['contributor_id'], ['contributor.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('api_keys',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('key', sa.String(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('key')
+    )
 
     # ### end Alembic commands ###
 
