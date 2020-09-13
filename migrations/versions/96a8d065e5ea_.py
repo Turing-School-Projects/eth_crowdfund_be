@@ -69,6 +69,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['contributor_id'], ['contributor.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
     # ### end Alembic commands ###
 
 
