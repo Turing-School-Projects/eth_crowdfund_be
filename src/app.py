@@ -17,7 +17,7 @@ def create_app(env_name):
   app = Flask(__name__)
 
   cors = CORS(app)
-  app.config['CORS_HEADERS'] = 'Content-Type'
+  app.config['_HEADERS'] = 'Content-Type'
 
   app.config.from_object(app_config[env_name])
 
@@ -30,6 +30,5 @@ def create_app(env_name):
   @app.route('/', methods=['GET'])
   def index():
     return 'Etherium for life'
-
 
   return app

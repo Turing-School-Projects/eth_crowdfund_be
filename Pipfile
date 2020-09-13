@@ -21,6 +21,8 @@ flask-cors = "*"
 requests = "*"
 flask-mail = "*"
 sendgrid = "*"
+schedule = "*"
+apscheduler = "*"
 
 [requires]
 python_version = "3.8"
