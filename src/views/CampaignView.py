@@ -108,3 +108,5 @@ def add_contributor_to_campaign(campaign_address, contributor_address):
 
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
+
+
