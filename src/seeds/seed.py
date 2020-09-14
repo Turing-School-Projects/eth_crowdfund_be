@@ -3,6 +3,7 @@ from ..models.Campaign import Campaign
 from ..models.Request import Request
 from ..models.Contributor import Contributor
 from ..models.CampaignContributor import CampaignContributor
+from ..models.ApiKey import ApiKey
  
 def add_seeds():
  
@@ -113,19 +114,25 @@ def add_seeds():
        "contributor_id": 0,
        "value": 50
     }
+
+    api_key_admin = {
+      "key": "macbeth",
+      "email": "admin@ethoboost.com"
+    }
  
     # Deletes all rows in Campaign Table
     db.session.query(CampaignContributor).delete()
     db.session.query(Contributor).delete()
     db.session.query(Request).delete()
     db.session.query(Campaign).delete()
+    db.session.query(ApiKey).delete()
     
     # Campaigns
     campaign_list = [Campaign(campaign1), Campaign(campaign2), Campaign(campaign3)]
     db.session.add_all(campaign_list)
     campaign_ids = db.session.query(Campaign.id).all()
     campaign_ids = [r[0] for r in campaign_ids]
-    
+
     # Requests
     request1['campaign_id'] = campaign_ids[0]
     request2['campaign_id'] = campaign_ids[0]
@@ -153,7 +160,11 @@ def add_seeds():
     
     campaign_contributor_list = [CampaignContributor(campaign_contributor1), CampaignContributor(campaign_contributor2), CampaignContributor(campaign_contributor3)]
     db.session.add_all(campaign_contributor_list)
-    db.session.commit()
+
+    # ApiKeys
+    api_key_list = [ApiKey(api_key_admin)]
+    db.session.add_all(api_key_list)
+    db.session.commit(),
     
     print('Finished Seeding')
     return
