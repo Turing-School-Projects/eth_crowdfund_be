@@ -72,6 +72,7 @@ def upgrade():
     op.create_table('api_keys',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('key', sa.String(), nullable=False),
+    sa.Column('email', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -87,4 +88,5 @@ def downgrade():
     op.drop_table('contributor')
     op.drop_table('requests')
     op.drop_table('campaigns')
+    op.drop_table('api_keys')
     # ### end Alembic commands ###
