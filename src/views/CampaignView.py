@@ -109,19 +109,4 @@ def add_contributor_to_campaign(campaign_address, contributor_address):
   campaign_data = campaign_schema.dump(campaign)
   return custom_response(campaign_data, 201)
 
-@campaign_api.route('/api_key', methods=['POST'])
-def test_fxn():
- 
-  if api_key_check(request): return api_key_check(request)
 
-  return custom_response({"value":"key"}, 200)
-# @campaign_api.route('/api_key', methods=['GET'])
-# def api_key_check():
-#   # req_data = request.get_json()
-#   # import pdb; pdb.set_trace()
-#   return custom_response({"value":"key"}, 200)
-
-def api_key_check(req):
-  api_key = '1234abcd'
-  if req.headers["api-key"] != api_key:
-    return custom_response({"error": "incorrect API key"}, 400)
