@@ -20,7 +20,7 @@ def create():
   except ValidationError as err:
     return custom_response(err.messages, 400)
   except:
-    return custom_response({"error": "No input data provided"}, 400)
+    return custom_response({"error": "Please provide an email in request body"}, 400)
 
   api_key_info = ApiKey(data)
   api_key_info.save()
