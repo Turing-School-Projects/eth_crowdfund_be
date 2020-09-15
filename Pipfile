@@ -23,6 +23,7 @@ flask-mail = "*"
 sendgrid = "*"
 rq = "*"
 web3 = "*"
+rq-scheduler = "*"
 
 [requires]
 python_version = "3.8"

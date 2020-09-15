@@ -5,6 +5,7 @@ from src.models import Campaign, Request
 
 from src.app import create_app, db 
 from src.seeds.seed import add_seeds
+from src.tasks.blockchain_compare import compare_campaign_value
 
 env_name = os.getenv('FLASK_ENV')
 app = create_app(env_name)
@@ -18,6 +19,10 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def seed():
   add_seeds()
+
+@manager.command
+def database_check():
+  compare_campaign_value()
 
 if __name__ == '__main__':
   manager.run()
