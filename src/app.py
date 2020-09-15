@@ -31,6 +31,20 @@ def create_app(env_name):
 
   @app.route('/', methods=['GET'])
   def index():
-    return 'Etherium for life'
+    message = {'About': 'Welcome to the Etho Boost backend', 
+              'All Campaigns': 'GET: /api/v1/campaigns/', 
+              'Create Campaign': 'POST: /api/v1/campaigns/', 
+              'Update Campaign': 'PUT: /api/v1/campaigns/<campaign_id>',
+              'Campaign by ID': 'GET: /api/v1/campaigns/<campaign_id>',
+              'All Requests': 'GET: /api/v1/requests/', 
+              'Create Request': 'POST: /api/v1/requests/', 
+              'Update Request': 'PUT: /api/v1/requests/<request_id>',
+              'Request by ID': 'GET: /api/v1/requests/<request_id>',
+              'Create Contributor': 'POST: /api/v1/contributor/', 
+              'Update Contributor': 'PUT: /api/v1/contributor/<contributor_id>', 
+              'Contributor by contributor id': 'GET: /api/v1/contributor/<contributor_id>', 
+              'Price Conversion': 'GET: /api/v1/price_converter_api/?wei=<wei_amount>`',
+              }
+    return message
 
   return app

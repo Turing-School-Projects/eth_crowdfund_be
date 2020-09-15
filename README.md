@@ -1,9 +1,13 @@
 # Etho Boost - A crowdfund app built on Etherium
+- [About](#About)
 - [Setup](#setup)
 - [Database Setup](#database-setup)
 - [Seeding The Database](#seeding-the-database)
 - [Updating The Database](#database-updates)
 - [API Endpoints](#api-endpoints)
+
+## About <a name="about"></a>
+Etho-Boost is a crowdfunding platform built on the Ethereum Blockchain. View the production [frontend](https://etho-boost-crowdfund.herokuapp.com/) or [backend](https://etho-boost.herokuapp.com/)
 
 ## Setup <a name="setup"></a>
 <details>
@@ -71,8 +75,23 @@ Path: `eth_crowdfund_be`
  ```
  $ python3 manage.py db stamp head
  $ python3 manage.py db init
- $ python3 manage.py db migrate
  $ python3 manage.py db upgrade
+ => INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+    INFO  [alembic.runtime.migration] Will assume transactional DDL.
+    INFO  [alembic.runtime.migration] Running upgrade  -> 96a8d065e5ea, empty message
+ ```
+ *if you do not recieve:* `INFO  [alembic.runtime.migration] Running upgrade  -> 96a8d065e5ea, empty message`
+ *you may need to delete the alembic_version*
+ Run 
+ ```
+ $ psql 
+ =# \c eth_crowdfund_api_db
+ =# DELETE FROM alembic_version
+ DELTETE 1 
+ =# \q
+ $ python3 manage.py db stamp head 
+ $ python3 manage.py db downgrade 
+ $ python3 manage.py db upgrade 
  ```
  2. You can check the database by running
  ```
@@ -80,11 +99,13 @@ Path: `eth_crowdfund_be`
  $ \c eth_crowdfund_api_db
  $ \dt
  => List of relations
-    Schema |      Name       | Type  |  Owner
-    --------+-----------------+-------+----------
-    public | alembic_version | table | postgres
-    public | campaigns       | table | postgres
-    public | requests        | table | postgres
+    Schema |         Name         | Type  |     Owner      
+    --------+----------------------+-------+----------------
+    public | alembic_version      | table | postgres
+    public | campaign_contributor | table | postgres
+    public | campaigns            | table | postgres
+    public | contributor          | table | postgres
+    public | requests             | table | postgres
 
  $ SELECT * FROM campaigns;
  => id | name | description | image | manager | contributors | upvote | min_contribution | address | expiration | created_at | updated_at
@@ -94,7 +115,7 @@ Path: `eth_crowdfund_be`
  => id | campaign_id | description | image | value | recipient | approved | finalized | approvals | created_at | updated_at
    ----+-------------+-------------+-------+-------+-----------+----------+-----------+-----------+------------+------------
  ```
- 3. To exit the database, `$ exit`
+ 3. To exit the database, `exit` or `\q`
  </details>
  
  ### Seeding the Database <a name="seeding-the-database"></a>
@@ -451,19 +472,7 @@ To make updates to the database and run a new migration, run the following:
 ```
 </details>
 
-<details>
-  <summary> Convert Wei to USD </summary>
-
-* Path: `GET http://localhost:3000/api/v1/price_converter?wei={wei_amount}`
-* Requires query params with a key of 'wei' and value of the amount of wei to be converter
-* No body required
-* Example response
-```
-{
-    "USD": 357
-}
-```
-</details>
+### Contributors
 
 <details>
   <summary> Add a Contributor to a Campaign </summary>
@@ -559,5 +568,21 @@ To make updates to the database and run a new migration, run the following:
         "value": null
     }
 ]
+```
+</details>
+
+## Currency Conversion
+
+<details>
+  <summary> Convert Wei to USD </summary>
+
+* Path: `GET http://localhost:3000/api/v1/price_converter?wei={wei_amount}`
+* Requires query params with a key of 'wei' and value of the amount of wei to be converter
+* No body required
+* Example response
+```
+{
+    "USD": 357
+}
 ```
 </details>
