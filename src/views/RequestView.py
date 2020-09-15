@@ -26,10 +26,9 @@ def create():
   request_info = Request(data)
   request_info.save()
 
-  # # Finds/sends emails. Needs update to use link for the request page. 
   emails = [contributor.email for contributor in campaign.contributors]
   if len(emails) > 0: 
-    request_notification(emails, 'Test Link')
+    request_notification(emails, campaign.name)
 
   request_data = request_schema.dump(request_info)
   return custom_response(request_data, 201)
