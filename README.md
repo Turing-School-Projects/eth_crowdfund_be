@@ -1,13 +1,82 @@
 # Etho Boost - A crowdfund app built on Etherium
 - [About](#About)
+- [Team](#Team)
+- [Demo](#Demo)
+- [Why?](#Why?)
+- [Tech](#Tech)
 - [Setup](#setup)
 - [Database Setup](#database-setup)
 - [Seeding The Database](#seeding-the-database)
 - [Updating The Database](#database-updates)
 - [API Endpoints](#api-endpoints)
 
-## About <a name="about"></a>
-Etho-Boost is a crowdfunding platform built on the Ethereum Blockchain. View the production [frontend](https://etho-boost-crowdfund.herokuapp.com/) or [backend](https://etho-boost.herokuapp.com/)
+## About  
+[Etho-Boost](https://etho-boost-crowdfund.herokuapp.com/) is a crowdfunding platform that runs on the Ethereum blockchain. It the capstone/cross-pollination project built by 6 students at Turing School of Software and Design in their 4th and final module. Powered by smart-contracts deployed to the Ethereum Virtual Machine(EVM), Etho-Boost gives donors the power to review and approve withdrawal requests from the Boosters(campaigns) they have donated to, ensuring that donations are used as advertised.
+
+## Team
+
+### Blockchain/Front End
+
+[Jack Cullen](https://github.com/jpc20)
+
+### [Front-End](https://github.com/Turing-School-Projects/eth-crowdfund-fe)
+
+[Andy Tom](https://github.com/attom2)
+
+[Edwin Montealvo](https://github.com/edmdc89)
+
+### Back-End
+
+[Antonio Jackson](https://github.com/AntonioJacksonII)
+
+[Ross Perry](https://github.com/perryr16)
+
+[Taylor Keller](https://github.com/takeller)
+
+## Demo
+
+[![](http://img.youtube.com/vi/0h1UFCdixyE/0.jpg)](https://www.youtube.com/embed/Fkq_CC_XmZI "Etho-Boost Demo")
+
+## Why? 
+
+#### Trust  
+ The untrustworthy nature of crowdfunding websites deters potential donors because there is no accountability. Fundraisers are not expected to publish honest, detailed information about where a donated dollar goes, and EthoBoost demands more transparency. 
+EthoBoost gives donors the power to review and approve requests to withdraw funds before a manager can complete a withdrawal, ensuring that donations are used as advertised. Fund managers set a minimum value that a donor must contribute in order to have approval rights for that fund. A fund manager must create a request to withdraw donations, and the request must be approved by over 50% of ‘approvers’ for the campaign.
+
+#### Borderless and Bankless  
+ Today’s financial system makes it extremely difficult to send and receive money across borders, forcing crowdfunding platforms to restrict transactions by imposing fees on international donations. EthoBoost is built on the Ethereum blockchain, granting donors and fundraisers the freedom to exchange funds without the constraints of a traditional bank account from any specific country. 
+ 
+ #### Transactions(Fees and time) 
+ Crowdfunding platforms generally charge a 5% transaction fee, and transactions take at least 3-5 business days to complete. Facilitated by the Ethereum blockchain, EthoBoosts transactions cost just a few cents and finalize in 30 seconds.
+
+
+## Tech
+
+### Front End
+  - Vue.js
+  - Jest
+  - TravisCI
+  - Heroku 
+  - HTML/SCSS
+### Blockchain
+  - Solidity
+  - Truffle
+  - Ganache
+  - Metamask
+  - Web3
+### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+  - Python 
+  - Flask
+  - pytest
+  - PostgreSQL
+  - SQLAlchemy
+
+## Future Iterations
+  * Transition to a stable coin(DAI, USDC, USDT, etc.)
+  * Mobile App/PWA
+  * Deploy to the Main Ethereum Network
+  * Increase functionality around requests
+
 
 ## Setup <a name="setup"></a>
 <details>
