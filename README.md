@@ -52,7 +52,7 @@ EthoBoost gives donors the power to review and approve requests to withdraw fund
 
 ## Tech
 
-### Front End
+### [Front-End](https://github.com/Turing-School-Projects/eth-crowdfund-fe)
   - Vue.js
   - Jest
   - TravisCI
@@ -64,7 +64,7 @@ EthoBoost gives donors the power to review and approve requests to withdraw fund
   - Ganache
   - Metamask
   - Web3
-### [Back-End](https://github.com/Eth-Crowdfund/eth_crowdfund_be) 
+### Back-End 
   - Python 
   - Flask
   - pytest
