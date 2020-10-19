@@ -2,7 +2,7 @@
 - [About](#About)
 - [Team](#Team)
 - [Demo](#Demo)
-- [Why?](#Why?)
+- [Why?](#Why)
 - [Tech](#Tech)
 - [Setup](#setup)
 - [Database Setup](#database-setup)
